@@ -1,0 +1,2469 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>REAPROVEITA — Menos desperdício, mais conexão, mais cuidado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+  :root{
+    --verde:#1f8a4c; --verde-escuro:#0f5c30; --verde-claro:#e6f4ea; --verde-suave:#f0f9f3;
+    --amarelo:#f5b301; --vermelho:#d64545; --cinza-bg:#f6f8f7;
+    --texto:#1a2620; --texto-suave:#5f6f66; --borda:#e4ebe6;
+    --card-bg:#ffffff; --card-bg-suave:#fbfdfb;
+    --sombra-sm:0 1px 3px rgba(20,50,30,.06);
+    --sombra-md:0 4px 16px rgba(20,50,30,.08);
+    --sombra-lg:0 12px 40px rgba(20,50,30,.12);
+    --raio-sm:10px; --raio:16px; --raio-lg:22px; --fonte-base:15px;
+    --body-bg:linear-gradient(135deg,#d8e8dd 0%,#c5dccf 100%);
+    --header-bg:var(--verde); --tabs-bg:rgba(255,255,255,.96);
+    --toast-bg:var(--verde-escuro); --chat-inst-bg:#eef2f0;
+    --mapa-bg:linear-gradient(135deg,#d4e8dc,#b8d9c4);
+    --check-bg:#fffbea; --notif-bg:#ffffff; --input-bg:#fbfdfb;
+    --ranking-border:var(--borda); --modal-bg:#ffffff; --modal-overlay:rgba(10,30,20,.55);
+    --splash-bg:linear-gradient(135deg,var(--verde),var(--verde-escuro));
+    --btn-secondary-bg:var(--verde-claro); --btn-secondary-color:var(--verde-escuro);
+    --btn-danger-bg:#fdecec; --btn-danger-color:var(--vermelho); --btn-danger-border:#f5c2c2;
+    --zona-risco-bg:#fff8f8; --zona-risco-border:#f5c2c2;
+    --oferta-borda:var(--borda); --oferta-bg:#ffffff; --kpi-bg:#ffffff;
+    --barra-bg:#e8f0eb; --selo-bg:var(--verde-claro); --selo-color:var(--verde-escuro);
+    --selo-amarelo-bg:#fff3cd; --selo-amarelo-color:#8a6500;
+    --selo-vermelho-bg:#fdecec; --selo-vermelho-color:var(--vermelho);
+    --relatorio-bg:#ffffff; --chat-bg:#ffffff;
+    --acess-btn-bg:#ffffff; --acess-btn-border:var(--borda); --acess-btn-color:var(--texto);
+    --acess-ativo-bg:var(--verde); --acess-ativo-color:#fff;
+    --codigo-bg:linear-gradient(135deg,var(--verde-escuro),var(--verde));
+    --badge-bg:var(--amarelo); --badge-color:#000; --badge-border:var(--verde);
+    --loading-bg:rgba(255,255,255,.25); --loading-fill:var(--amarelo);
+    --vazio-color:var(--texto-suave);
+  }
+  body.dark-mode{
+    --verde:#3cb371; --verde-escuro:#2e8b57; --verde-claro:#1e3a2a; --verde-suave:#16281c;
+    --amarelo:#ffc107; --vermelho:#ff6b6b; --cinza-bg:#0f1712;
+    --texto:#e8f0eb; --texto-suave:#9aab9f; --borda:#2a3d2f;
+    --card-bg:#1a2b20; --card-bg-suave:#1e3124;
+    --sombra-sm:0 1px 3px rgba(0,0,0,.3);
+    --sombra-md:0 4px 16px rgba(0,0,0,.4);
+    --sombra-lg:0 12px 40px rgba(0,0,0,.5);
+    --body-bg:linear-gradient(135deg,#0a120d 0%,#0f1a12 100%);
+    --header-bg:#1a3d28; --tabs-bg:rgba(20,35,25,.96);
+    --toast-bg:#2e8b57; --chat-inst-bg:#2a3d2f;
+    --mapa-bg:linear-gradient(135deg,#1a3d28,#0f2a18);
+    --check-bg:#2a2a1a; --notif-bg:#1a2b20; --input-bg:#1e3124;
+    --ranking-border:#2a3d2f; --modal-bg:#1a2b20; --modal-overlay:rgba(0,0,0,.75);
+    --splash-bg:linear-gradient(135deg,#1a3d28,#0a1f12);
+    --btn-secondary-bg:#1e3a2a; --btn-secondary-color:#3cb371;
+    --btn-danger-bg:#3a1a1a; --btn-danger-color:#ff6b6b; --btn-danger-border:#5a2a2a;
+    --zona-risco-bg:#2a1a1a; --zona-risco-border:#5a2a2a;
+    --oferta-borda:#2a3d2f; --oferta-bg:#1a2b20; --kpi-bg:#1a2b20;
+    --barra-bg:#1e3124; --selo-bg:#1e3a2a; --selo-color:#3cb371;
+    --selo-amarelo-bg:#3a2a1a; --selo-amarelo-color:#ffc107;
+    --selo-vermelho-bg:#3a1a1a; --selo-vermelho-color:#ff6b6b;
+    --relatorio-bg:#1a2b20; --chat-bg:#1a2b20;
+    --acess-btn-bg:#1e3124; --acess-btn-border:#2a3d2f; --acess-btn-color:#e8f0eb;
+    --acess-ativo-bg:#3cb371; --acess-ativo-color:#0a1f12;
+    --codigo-bg:linear-gradient(135deg,#0a1f12,#1a3d28);
+    --badge-bg:#ffc107; --badge-color:#000; --badge-border:#1a3d28;
+    --loading-bg:rgba(255,255,255,.15); --loading-fill:#ffc107;
+    --vazio-color:#9aab9f;
+  }
+  body.alto-contraste{
+    --verde:#0b5d2e; --verde-escuro:#062c15; --verde-claro:#c9ecd6; --verde-suave:#e0f5e8;
+    --texto:#000; --cinza-bg:#fff; --borda:#333;
+    --sombra-sm:0 0 0 1px #000; --sombra-md:0 0 0 2px #000; --sombra-lg:0 0 0 3px #000;
+    --card-bg:#ffffff; --card-bg-suave:#ffffff; --body-bg:#ffffff;
+    --header-bg:#0b5d2e; --tabs-bg:#ffffff; --toast-bg:#062c15;
+    --chat-inst-bg:#f0f0f0; --mapa-bg:#d4e8dc; --check-bg:#fffbea;
+    --notif-bg:#ffffff; --input-bg:#ffffff; --ranking-border:#333;
+    --modal-bg:#ffffff; --modal-overlay:rgba(0,0,0,.6); --splash-bg:#0b5d2e;
+    --btn-secondary-bg:#c9ecd6; --btn-secondary-color:#062c15;
+    --btn-danger-bg:#fdecec; --btn-danger-color:#d64545; --btn-danger-border:#f5c2c2;
+    --zona-risco-bg:#fff8f8; --zona-risco-border:#f5c2c2;
+    --oferta-borda:#333; --oferta-bg:#ffffff; --kpi-bg:#ffffff;
+    --barra-bg:#e8f0eb; --selo-bg:#c9ecd6; --selo-color:#062c15;
+    --selo-amarelo-bg:#fff3cd; --selo-amarelo-color:#8a6500;
+    --selo-vermelho-bg:#fdecec; --selo-vermelho-color:#d64545;
+    --relatorio-bg:#ffffff; --chat-bg:#ffffff;
+    --acess-btn-bg:#ffffff; --acess-btn-border:#333; --acess-btn-color:#000;
+    --acess-ativo-bg:#0b5d2e; --acess-ativo-color:#ffffff;
+    --codigo-bg:#0b5d2e; --badge-bg:#f5b301; --badge-color:#000; --badge-border:#0b5d2e;
+    --loading-bg:rgba(255,255,255,.25); --loading-fill:#f5b301; --vazio-color:#333;
+  }
+  body.alto-contraste.dark-mode{
+    --verde:#00ff88; --verde-escuro:#00cc66; --verde-claro:#003322; --verde-suave:#002a1a;
+    --texto:#ffffff; --cinza-bg:#000000; --borda:#ffffff;
+    --sombra-sm:0 0 0 1px #fff; --sombra-md:0 0 0 2px #fff; --sombra-lg:0 0 0 3px #fff;
+    --card-bg:#0a0a0a; --card-bg-suave:#111111; --body-bg:#000000;
+    --header-bg:#003322; --tabs-bg:#0a0a0a; --toast-bg:#00cc66;
+    --chat-inst-bg:#1a1a1a; --mapa-bg:#002a1a; --check-bg:#1a1a00;
+    --notif-bg:#0a0a0a; --input-bg:#111111; --ranking-border:#ffffff;
+    --modal-bg:#0a0a0a; --modal-overlay:rgba(0,0,0,.85); --splash-bg:#003322;
+    --btn-secondary-bg:#003322; --btn-secondary-color:#00ff88;
+    --btn-danger-bg:#330000; --btn-danger-color:#ff4444; --btn-danger-border:#ff4444;
+    --zona-risco-bg:#1a0000; --zona-risco-border:#ff4444;
+    --oferta-borda:#ffffff; --oferta-bg:#0a0a0a; --kpi-bg:#0a0a0a;
+    --barra-bg:#1a1a1a; --selo-bg:#003322; --selo-color:#00ff88;
+    --selo-amarelo-bg:#332a00; --selo-amarelo-color:#ffdd00;
+    --selo-vermelho-bg:#330000; --selo-vermelho-color:#ff4444;
+    --relatorio-bg:#0a0a0a; --chat-bg:#0a0a0a;
+    --acess-btn-bg:#111111; --acess-btn-border:#ffffff; --acess-btn-color:#ffffff;
+    --acess-ativo-bg:#00ff88; --acess-ativo-color:#000000;
+    --codigo-bg:#003322; --badge-bg:#ffdd00; --badge-color:#000; --badge-border:#003322;
+    --loading-bg:rgba(255,255,255,.2); --loading-fill:#00ff88; --vazio-color:#cccccc;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html{font-size:var(--fonte-base)}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+    background:var(--body-bg); color:var(--texto);
+    display:flex; justify-content:center; align-items:center; min-height:100vh; padding:0;
+    transition:font-size .2s, background .35s, color .35s;
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  }
+  .phone{
+    width:100%; max-width:400px; height:100vh; max-height:880px;
+    background:var(--cinza-bg); position:relative; overflow:hidden;
+    display:flex; flex-direction:column; border-radius:0; box-shadow:none;
+    transition:background .35s;
+  }
+  @media(min-width:480px){
+    .phone{border-radius:38px; height:92vh;
+      box-shadow:0 0 0 1px rgba(255,255,255,.6) inset, 0 30px 80px rgba(20,50,30,.22), 0 10px 30px rgba(20,50,30,.14);}
+    body.dark-mode .phone{box-shadow:0 0 0 1px rgba(60,179,113,.2) inset, 0 30px 80px rgba(0,0,0,.6), 0 10px 30px rgba(0,0,0,.4);}
+  }
+  header{
+    background:var(--header-bg); color:#fff; padding:14px 18px 12px;
+    display:flex; align-items:center; gap:8px; flex-shrink:0;
+    position:relative; z-index:5; transition:background .35s;
+  }
+  header .logo{font-weight:800; font-size:1.15rem; letter-spacing:.3px; display:flex; align-items:center; gap:2px;}
+  header .logo span{color:var(--amarelo)}
+  header .acoes-topo{margin-left:auto; display:flex; gap:4px; align-items:center}
+  .icone-btn{
+    background:rgba(255,255,255,.15); border:none; color:#fff;
+    width:36px;height:36px; border-radius:50%; font-size:1rem; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition:background .2s, transform .1s; position:relative;
+  }
+  .icone-btn:active{transform:scale(.92); background:rgba(255,255,255,.28)}
+  .badge{
+    position:absolute; top:2px; right:2px; background:var(--badge-bg); color:var(--badge-color);
+    font-size:.6rem; font-weight:800; border-radius:10px; padding:1px 5px;
+    min-width:16px; height:16px; display:flex; align-items:center; justify-content:center;
+    border:2px solid var(--badge-border); transition:background .35s;
+  }
+  main{
+    flex:1; overflow-y:auto; padding:18px 16px;
+    background:var(--cinza-bg); padding-bottom:88px; scroll-behavior:smooth;
+    transition:background .35s;
+  }
+  main::-webkit-scrollbar{width:0}
+  .screen{display:none; animation:fadeUp .3s ease}
+  .screen.active{display:block}
+  @keyframes fadeUp{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+  h1{font-size:1.35rem; font-weight:800; margin-bottom:4px; color:var(--texto); letter-spacing:-.3px; transition:color .35s}
+  h2{font-size:1rem; font-weight:700; margin:18px 0 10px; color:var(--texto); letter-spacing:-.2px; transition:color .35s}
+  .sub{font-size:.85rem; color:var(--texto-suave); margin-bottom:16px; line-height:1.5; transition:color .35s}
+
+  .card{
+    background:var(--card-bg); border-radius:var(--raio); padding:16px;
+    box-shadow:var(--sombra-sm); margin-bottom:12px;
+    border:1px solid var(--borda);
+    transition:box-shadow .2s, background .35s, border-color .35s;
+  }
+  .card.destaque{background:var(--verde-suave); border-color:var(--verde-claro)}
+  .card.perigo{border-color:var(--btn-danger-border); background:var(--btn-danger-bg)}
+
+  .btn{
+    display:block; width:100%; border:none; border-radius:14px; padding:15px;
+    font-size:.95rem; font-weight:700; cursor:pointer;
+    transition:transform .1s, background .2s, box-shadow .2s, color .35s;
+    font-family:inherit; letter-spacing:.2px;
+  }
+  .btn:active{transform:scale(.97)}
+  .btn-primary{background:var(--verde); color:#fff; box-shadow:0 4px 14px rgba(31,138,76,.28)}
+  .btn-primary:hover{background:var(--verde-escuro)}
+  .btn-secondary{background:var(--btn-secondary-bg); color:var(--btn-secondary-color); margin-top:8px}
+  .btn-danger{background:var(--btn-danger-bg); color:var(--btn-danger-color); margin-top:8px; border:1px solid var(--btn-danger-border)}
+  .btn-ghost{background:transparent; color:var(--verde-escuro); font-weight:700; margin-top:10px}
+  body.dark-mode .btn-ghost{color:var(--verde)}
+
+  label{display:block; font-size:.78rem; font-weight:700; color:var(--texto); margin:14px 0 6px; letter-spacing:.1px; transition:color .35s}
+  input,select,textarea{
+    width:100%; padding:13px 14px; border:1.5px solid var(--borda); border-radius:12px;
+    font-size:.92rem; font-family:inherit; background:var(--input-bg); color:var(--texto);
+    transition:border-color .2s, box-shadow .2s, background .35s, color .35s;
+  }
+  input:focus,select:focus,textarea:focus{
+    outline:none; border-color:var(--verde);
+    box-shadow:0 0 0 3px rgba(31,138,76,.12); background:var(--card-bg);
+  }
+  body.dark-mode input:focus,body.dark-mode select:focus,body.dark-mode textarea:focus{box-shadow:0 0 0 3px rgba(60,179,113,.2);}
+  .erro{border-color:var(--vermelho)!important; background:var(--btn-danger-bg)}
+  .msg-erro{color:var(--vermelho); font-size:.75rem; margin-top:5px; display:none; font-weight:600}
+  .msg-erro.show{display:block}
+
+  .check{
+    display:flex; align-items:flex-start; gap:10px;
+    background:var(--check-bg); border:1.5px dashed var(--amarelo);
+    padding:13px; border-radius:12px; margin-top:14px;
+    font-size:.82rem; line-height:1.45; transition:background .35s;
+  }
+  .check input{width:auto; margin-top:1px; accent-color:var(--verde); transform:scale(1.15)}
+  .check strong{color:#8a6500}
+  body.dark-mode .check strong{color:var(--amarelo)}
+
+  .oferta{
+    background:var(--oferta-bg); border-radius:var(--raio); padding:16px;
+    box-shadow:var(--sombra-sm); margin-bottom:12px; cursor:pointer;
+    border:1px solid var(--oferta-borda); border-left:5px solid var(--verde);
+    transition:transform .1s, box-shadow .2s, background .35s, border-color .35s;
+  }
+  .oferta:active{transform:scale(.98); box-shadow:var(--sombra-md)}
+  .oferta.esgotada{opacity:.6; border-left-color:var(--texto-suave); cursor:not-allowed; background:var(--card-bg-suave);}
+  .oferta.esgotada .nome{text-decoration:line-through; text-decoration-color:var(--vermelho)}
+  .oferta .topo{display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; gap:8px}
+  .oferta .nome{font-weight:800; font-size:.98rem; letter-spacing:-.2px; color:var(--texto)}
+  .selo{
+    font-size:.62rem; font-weight:800; background:var(--selo-bg); color:var(--selo-color);
+    padding:4px 9px; border-radius:20px; text-transform:uppercase; white-space:nowrap;
+    letter-spacing:.4px; transition:background .35s, color .35s;
+  }
+  .selo.amarelo{background:var(--selo-amarelo-bg); color:var(--selo-amarelo-color)}
+  .selo.vermelho{background:var(--selo-vermelho-bg); color:var(--selo-vermelho-color)}
+  .selo.esgotada-selo{background:var(--barra-bg); color:var(--texto-suave)}
+  .oferta .info{font-size:.82rem; color:var(--texto-suave); line-height:1.55}
+
+  .alerta-esgotada{
+    background:var(--btn-danger-bg); border:1.5px solid var(--btn-danger-border);
+    color:var(--btn-danger-color); padding:12px; border-radius:12px;
+    font-size:.82rem; font-weight:700; margin-bottom:14px; text-align:center;
+    display:flex; align-items:center; justify-content:center; gap:8px;
+  }
+
+  .kpis{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px}
+  .kpi{
+    background:var(--kpi-bg); border-radius:var(--raio); padding:16px 12px;
+    box-shadow:var(--sombra-sm); text-align:center;
+    border:1px solid var(--borda); transition:background .35s, border-color .35s;
+  }
+  .kpi .num{font-size:1.6rem; font-weight:800; color:var(--verde); letter-spacing:-.5px; line-height:1}
+  .kpi .lbl{font-size:.68rem; color:var(--texto-suave); text-transform:uppercase; letter-spacing:.5px; margin-top:6px; font-weight:700}
+  .barra{background:var(--barra-bg); border-radius:8px; height:10px; overflow:hidden; margin:8px 0 14px; transition:background .35s}
+  .barra > div{height:100%; background:linear-gradient(90deg,var(--verde),#4bc47f); border-radius:8px; transition:width .8s ease}
+
+  .tabs{
+    position:absolute; bottom:0; left:0; right:0;
+    background:var(--tabs-bg); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+    border-top:1px solid var(--borda); display:flex; justify-content:space-around;
+    padding:8px 0 12px; z-index:10; transition:background .35s, border-color .35s;
+  }
+  .tab{
+    background:none; border:none; display:flex; flex-direction:column; align-items:center; gap:3px;
+    font-size:.62rem; font-weight:700; color:var(--texto-suave);
+    cursor:pointer; font-family:inherit; padding:6px 6px; border-radius:12px;
+    flex:1; min-width:0; transition:color .2s, background .2s;
+    position:relative; letter-spacing:.2px;
+  }
+  .tab .ico{font-size:1.25rem; transition:transform .2s}
+  .tab.ativo{color:var(--verde); background:var(--verde-claro)}
+  .tab.ativo .ico{transform:scale(1.08)}
+  .tabs.scrollable{overflow-x:auto; justify-content:flex-start; padding-left:8px; padding-right:8px; scrollbar-width:none;}
+  .tabs.scrollable::-webkit-scrollbar{display:none}
+  .tabs.scrollable .tab{flex:0 0 auto; min-width:60px; padding:6px 8px; font-size:.58rem}
+
+  .toast{
+    position:absolute; bottom:96px; left:50%;
+    transform:translateX(-50%) translateY(80px);
+    background:var(--toast-bg); color:#fff; padding:13px 20px; border-radius:30px;
+    font-size:.82rem; font-weight:600; opacity:0;
+    transition:all .35s cubic-bezier(.34,1.56,.64,1);
+    pointer-events:none; white-space:nowrap; box-shadow:0 10px 30px rgba(0,0,0,.25);
+    z-index:20; max-width:92%; text-align:center;
+  }
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+
+  .voltar{
+    background:none; border:none; color:var(--verde-escuro); font-weight:700; font-size:.85rem;
+    cursor:pointer; margin-bottom:14px; font-family:inherit; padding:4px 0;
+    display:flex; align-items:center; gap:4px; transition:color .35s;
+  }
+  body.dark-mode .voltar{color:var(--verde)}
+
+  .chat{max-height:280px; overflow-y:auto; background:var(--chat-bg); border-radius:var(--raio); padding:12px; box-shadow:var(--sombra-sm); margin-bottom:10px; border:1px solid var(--borda); transition:background .35s, border-color .35s}
+  .msg{padding:10px 14px; border-radius:16px; font-size:.85rem; margin-bottom:8px; max-width:80%; line-height:1.45}
+  .msg.doador{background:var(--verde-claro); color:var(--texto); margin-left:auto; border-bottom-right-radius:4px}
+  .msg.inst{background:var(--chat-inst-bg); color:var(--texto); margin-right:auto; border-bottom-left-radius:4px}
+  .msg small{display:block; font-size:.62rem; opacity:.65; margin-top:4px}
+  .chat-input{display:flex; gap:8px}
+  .chat-input input{flex:1}
+  .chat-input button{background:var(--verde); color:#fff; border:none; border-radius:12px; padding:0 18px; font-weight:700; cursor:pointer; font-family:inherit}
+
+  .mapa{background:var(--mapa-bg); border-radius:var(--raio); height:130px; position:relative; overflow:hidden; margin-bottom:14px; border:1px solid var(--borda); transition:background .35s, border-color .35s;}
+  .mapa::before{content:''; position:absolute; background:rgba(255,255,255,.75); width:8px; height:100%; left:30%;}
+  .mapa::after{content:''; position:absolute; background:rgba(255,255,255,.75); width:100%; height:8px; top:50%;}
+  body.dark-mode .mapa::before,body.dark-mode .mapa::after{background:rgba(60,179,113,.3);}
+  body.alto-contraste .mapa::before,body.alto-contraste .mapa::after{background:#fff;}
+  .pin{position:absolute; top:35%; left:45%; font-size:1.5rem; animation:bounce 1.8s infinite; filter:drop-shadow(0 3px 6px rgba(0,0,0,.2))}
+  @keyframes bounce{0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)}}
+
+  .ranking-item{display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--ranking-border); font-size:.88rem; transition:border-color .35s}
+  .ranking-item:last-child{border-bottom:none}
+  .ranking-item .pos{font-weight:800; color:var(--verde); width:26px; font-size:.95rem}
+  .ranking-item .nome-parc{flex:1; font-weight:600; color:var(--texto)}
+  .ranking-item .kg{color:var(--texto-suave); font-size:.78rem; font-weight:700}
+
+  .notif{background:var(--notif-bg); border-radius:14px; padding:14px; margin-bottom:10px; box-shadow:var(--sombra-sm); font-size:.85rem; border:1px solid var(--borda); border-left:4px solid var(--verde); transition:background .35s, border-color .35s;}
+  .notif strong{color:var(--texto)} .notif div{color:var(--texto)}
+  .notif small{display:block; color:var(--texto-suave); font-size:.68rem; margin-top:6px}
+
+  .codigo{background:var(--codigo-bg); color:#fff; text-align:center; padding:20px; border-radius:16px; font-size:1.8rem; font-weight:800; letter-spacing:6px; margin:14px 0; box-shadow:0 8px 24px rgba(31,138,76,.3); font-family:'Courier New',monospace; transition:background .35s;}
+
+  .acess{display:flex; gap:8px; margin-top:14px}
+  .acess button{flex:1; background:var(--acess-btn-bg); border:1.5px solid var(--acess-btn-border); border-radius:12px; padding:12px 8px; font-size:.76rem; font-weight:700; cursor:pointer; color:var(--acess-btn-color); font-family:inherit; transition:all .2s;}
+  .acess button.ativo{background:var(--acess-ativo-bg); color:var(--acess-ativo-color); border-color:var(--acess-ativo-bg)}
+
+  .relatorio{background:var(--relatorio-bg); border-radius:var(--raio); padding:18px; box-shadow:var(--sombra-sm); font-size:.85rem; line-height:1.65; border:1px solid var(--borda); transition:background .35s, border-color .35s;}
+  .relatorio h3{color:var(--verde-escuro); margin-bottom:10px; font-size:1rem}
+  body.dark-mode .relatorio h3{color:var(--verde)}
+  .relatorio table{width:100%; border-collapse:collapse; margin:10px 0}
+  .relatorio td{padding:8px 4px; border-bottom:1px solid var(--borda); color:var(--texto)}
+  .relatorio td:last-child{text-align:right; font-weight:700}
+
+  .splash{position:absolute; inset:0; background:var(--splash-bg); display:flex; flex-direction:column; align-items:center; justify-content:center; color:#fff; z-index:50; transition:opacity .6s, background .35s;}
+  .splash.hide{opacity:0; pointer-events:none}
+  .splash .logo{font-size:2.2rem; font-weight:800; letter-spacing:.5px}
+  .splash .logo span{color:var(--amarelo)}
+  .splash .slogan{font-size:.88rem; margin-top:10px; opacity:.92; font-weight:500}
+  .splash .load{width:60%; height:4px; background:var(--loading-bg); border-radius:4px; margin-top:28px; overflow:hidden}
+  .splash .load div{height:100%; background:var(--loading-fill); width:0; animation:load 1.3s ease forwards}
+  @keyframes load{to{width:100%}}
+
+  .modal{position:absolute; inset:0; background:var(--modal-overlay); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); display:none; align-items:center; justify-content:center; z-index:60; padding:22px; animation:fade .25s ease; transition:background .35s;}
+  .modal.show{display:flex}
+  .modal-box{background:var(--modal-bg); border-radius:22px; padding:26px 22px; max-width:340px; width:100%; box-shadow:0 30px 80px rgba(0,0,0,.35); text-align:center; animation:pop .3s cubic-bezier(.34,1.56,.64,1); transition:background .35s;}
+  @keyframes pop{from{transform:scale(.9); opacity:0} to{transform:scale(1); opacity:1}}
+  .modal-box .icone-alerta{font-size:2.8rem; margin-bottom:10px}
+  .modal-box h3{color:var(--vermelho); font-size:1.15rem; margin-bottom:10px; font-weight:800}
+  .modal-box p{font-size:.85rem; color:var(--texto-suave); line-height:1.55; margin-bottom:18px}
+  .modal-box p strong{color:var(--texto)}
+  .modal-box .botoes{display:flex; gap:10px}
+  .modal-box .botoes .btn{margin-top:0; padding:13px}
+  .modal-box .btn-cancelar{background:var(--barra-bg); color:var(--texto)}
+  .modal-box .btn-confirmar{background:var(--vermelho); color:#fff; box-shadow:0 4px 14px rgba(214,69,69,.3)}
+  .modal-box .btn-confirmar:disabled{opacity:.45; cursor:not-allowed; box-shadow:none}
+
+  .zona-risco{border:1.5px dashed var(--zona-risco-border); background:var(--zona-risco-bg)}
+  .zona-risco strong{color:var(--vermelho)}
+
+  .vazio{text-align:center; padding:32px 20px; color:var(--vazio-color); font-size:.88rem; transition:color .35s;}
+  .vazio .ico{font-size:2.5rem; margin-bottom:10px; opacity:.5}
+
+  .tema-indicador{display:flex; align-items:center; gap:8px; margin-top:12px; padding:10px 14px; background:var(--verde-suave); border-radius:12px; font-size:.78rem; color:var(--texto-suave); border:1px solid var(--verde-claro); transition:background .35s, border-color .35s, color .35s;}
+  .tema-indicador .bolinha{width:10px;height:10px; border-radius:50%; background:var(--verde); box-shadow:0 0 8px var(--verde); transition:background .35s, box-shadow .35s;}
+
+  .loja-busca{display:flex; align-items:center; gap:10px; background:var(--input-bg); border:1.5px solid var(--borda); border-radius:30px; padding:11px 18px; margin-bottom:14px; transition:border-color .2s, box-shadow .2s, background .35s;}
+  .loja-busca:focus-within{border-color:var(--verde); box-shadow:0 0 0 3px rgba(31,138,76,.12); background:var(--card-bg);}
+  body.dark-mode .loja-busca:focus-within{box-shadow:0 0 0 3px rgba(60,179,113,.2);}
+  .loja-busca span{font-size:1rem; opacity:.55}
+  .loja-busca input{flex:1; border:none; background:transparent; padding:0; font-size:.9rem;}
+  .loja-busca input:focus{outline:none; box-shadow:none; background:transparent; border:none}
+  .loja-banner{background:linear-gradient(135deg,var(--amarelo),#ff9500); color:#1a1200; border-radius:var(--raio); padding:16px 18px; margin-bottom:14px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 6px 20px rgba(245,179,1,.32); position:relative; overflow:hidden;}
+  .loja-banner::after{content:''; position:absolute; width:140px;height:140px; background:rgba(255,255,255,.22); border-radius:50%; right:-45px;top:-45px;}
+  .loja-banner h3{font-size:1.35rem; font-weight:800; margin:5px 0 2px; letter-spacing:-.3px}
+  .loja-banner p{font-size:.72rem; font-weight:700; opacity:.85}
+  .loja-banner .tag-promo{display:inline-block; background:#1a1200; color:var(--amarelo); font-size:.6rem; font-weight:800; padding:3px 8px; border-radius:6px; letter-spacing:.7px;}
+  .loja-banner .icone-banner{font-size:2.6rem; filter:drop-shadow(0 4px 8px rgba(0,0,0,.15)); z-index:1}
+  .loja-categorias{display:flex; gap:8px; overflow-x:auto; padding:2px 2px 12px; margin:0 -2px; scrollbar-width:none;}
+  .loja-categorias::-webkit-scrollbar{display:none}
+  .cat-pill{flex-shrink:0; background:var(--card-bg); border:1.5px solid var(--borda); border-radius:20px; padding:8px 16px; font-size:.78rem; font-weight:700; color:var(--texto); cursor:pointer; font-family:inherit; transition:all .2s; white-space:nowrap;}
+  .cat-pill:active{transform:scale(.95)}
+  .cat-pill.ativo{background:var(--verde); border-color:var(--verde); color:#fff; box-shadow:0 3px 10px rgba(31,138,76,.25);}
+  .loja-grade{display:grid; grid-template-columns:1fr 1fr; gap:11px}
+  .produto{background:var(--card-bg); border-radius:var(--raio); overflow:hidden; box-shadow:var(--sombra-sm); border:1px solid var(--borda); display:flex; flex-direction:column; transition:transform .1s, box-shadow .2s, background .35s, border-color .35s;}
+  .produto:active{transform:scale(.98); box-shadow:var(--sombra-md)}
+  .produto .img{aspect-ratio:1; background:linear-gradient(135deg,var(--verde-claro),var(--verde-suave)); display:flex; align-items:center; justify-content:center; font-size:2.8rem; position:relative;}
+  body.dark-mode .produto .img{background:linear-gradient(135deg,#1e3a2a,#16281c);}
+  .produto .desconto{position:absolute; top:8px;left:8px; background:var(--vermelho); color:#fff; font-size:.6rem; font-weight:800; padding:3px 7px; border-radius:6px; letter-spacing:.3px;}
+  .produto .corpo{padding:10px 11px 12px; display:flex; flex-direction:column; flex:1}
+  .produto .cat{font-size:.6rem; color:var(--texto-suave); font-weight:700; text-transform:uppercase; letter-spacing:.5px; margin-bottom:3px;}
+  .produto .nome-prod{font-size:.82rem; font-weight:700; color:var(--texto); line-height:1.3; margin-bottom:6px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; min-height:2.1em;}
+  .produto .precos{display:flex; align-items:baseline; gap:5px; flex-wrap:wrap; margin-bottom:5px}
+  .produto .preco{font-size:1rem; font-weight:800; color:var(--verde); letter-spacing:-.3px}
+  .produto .preco-velho{font-size:.66rem; color:var(--texto-suave); text-decoration:line-through}
+  .produto .rodape{display:flex; justify-content:space-between; align-items:center; font-size:.66rem; color:var(--texto-suave); margin-bottom:8px}
+  .produto .avaliacao{color:#e6a800; font-weight:700}
+  body.dark-mode .produto .avaliacao{color:var(--amarelo)}
+  .produto .vendidos{font-weight:600}
+  .produto .btn-add{width:100%; margin-top:auto; background:var(--verde); color:#fff; border:none; border-radius:10px; padding:9px; font-size:.74rem; font-weight:800; cursor:pointer; font-family:inherit; transition:background .2s, transform .1s; letter-spacing:.2px;}
+  .produto .btn-add:active{transform:scale(.95); background:var(--verde-escuro)}
+  .loja-carrinho{position:absolute; bottom:78px; left:12px;right:12px; background:linear-gradient(135deg,var(--verde-escuro),var(--verde)); color:#fff; border-radius:14px; padding:11px 16px; display:none; align-items:center; justify-content:space-between; box-shadow:0 10px 28px rgba(31,138,76,.4); z-index:9; animation:carrinhoSobe .3s cubic-bezier(.34,1.56,.64,1);}
+  @keyframes carrinhoSobe{from{transform:translateY(20px); opacity:0} to{transform:none; opacity:1}}
+  .loja-carrinho .info-cart{display:flex; align-items:center; gap:10px}
+  .loja-carrinho .ico-cart{font-size:1.3rem}
+  .loja-carrinho .txt-cart{display:flex; flex-direction:column; line-height:1.2}
+  .loja-carrinho .txt-cart strong{font-size:.82rem}
+  .loja-carrinho .txt-cart small{font-size:.68rem; opacity:.85; font-weight:600}
+  .loja-carrinho .btn-finalizar{background:#fff; color:var(--verde-escuro); border:none; border-radius:10px; padding:8px 16px; font-size:.78rem; font-weight:800; cursor:pointer; font-family:inherit; transition:transform .1s;}
+  .loja-carrinho .btn-finalizar:active{transform:scale(.94)}
+  .tab-badge{position:absolute; top:2px; right:8px; background:var(--vermelho); color:#fff; font-size:.55rem; font-weight:800; border-radius:10px; padding:1px 5px; min-width:14px; height:14px; display:flex; align-items:center; justify-content:center; border:1.5px solid var(--tabs-bg); transition:background .35s, border-color .35s;}
+
+  .persona-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px}
+  .persona-card{background:var(--card-bg); border:2px solid var(--borda); border-radius:var(--raio); padding:16px 10px 14px; text-align:center; cursor:pointer; transition:all .2s; font-family:inherit;}
+  .persona-card:active{transform:scale(.97)}
+  .persona-card.ativo{border-color:var(--verde); background:var(--verde-suave); box-shadow:0 4px 14px rgba(31,138,76,.18);}
+  .persona-card .icone-p{font-size:2rem; line-height:1; margin-bottom:6px; display:block}
+  .persona-card .nome-p{font-weight:800; font-size:.88rem; color:var(--texto); letter-spacing:-.2px;}
+  .persona-card .desc-p{font-size:.66rem; color:var(--texto-suave); margin-top:2px; font-weight:600;}
+  .persona-card.ativo .nome-p{color:var(--verde-escuro)}
+  body.dark-mode .persona-card.ativo .nome-p{color:var(--verde)}
+
+  .persona-preview{
+    display:flex; align-items:center; gap:12px;
+    margin-top:10px; padding:12px 14px;
+    background:var(--verde-suave);
+    border:1px solid var(--verde-claro);
+    border-radius:12px;
+    transition:background .35s, border-color .35s;
+  }
+  .persona-preview .pp-ico{
+    width:42px; height:42px; flex-shrink:0;
+    background:var(--card-bg); border-radius:11px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.35rem; border:1px solid var(--verde-claro);
+    box-shadow:var(--sombra-sm);
+    transition:background .35s, border-color .35s;
+  }
+  .persona-preview .pp-info{flex:1; min-width:0;}
+  .persona-preview .pp-nome{font-size:.88rem; font-weight:800; color:var(--texto); display:block; margin-bottom:2px; line-height:1.25;}
+  .persona-preview .pp-desc{font-size:.72rem; color:var(--texto-suave); line-height:1.4; display:block;}
+
+  .faq-item{background:var(--card-bg); border:1px solid var(--borda); border-radius:12px; margin-bottom:8px; overflow:hidden; transition:background .35s, border-color .35s;}
+  .faq-item summary{padding:14px 16px; font-weight:700; font-size:.85rem; cursor:pointer; color:var(--texto); display:flex; align-items:center; justify-content:space-between; list-style:none;}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::after{content:'+'; font-size:1.2rem; color:var(--verde); font-weight:800; transition:transform .2s;}
+  .faq-item[open] summary::after{content:'−'}
+  .faq-item .faq-content{padding:0 16px 14px; font-size:.82rem; color:var(--texto-suave); line-height:1.55;}
+
+  .destaque-card{background:linear-gradient(135deg,var(--verde-claro),var(--verde-suave)); border:1.5px solid var(--verde-claro); border-radius:var(--raio); padding:14px; margin-bottom:10px; display:flex; gap:12px; align-items:center; cursor:pointer; transition:transform .1s;}
+  body.dark-mode .destaque-card{background:linear-gradient(135deg,#1e3a2a,#16281c);}
+  .destaque-card:active{transform:scale(.98)}
+  .destaque-card .em-destaque{font-size:2.2rem; width:60px; height:60px; background:var(--card-bg); border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .destaque-card .info-destaque{flex:1}
+  .destaque-card .rank-destaque{font-size:.68rem; font-weight:800; color:var(--vermelho); text-transform:uppercase; letter-spacing:.5px;}
+  .destaque-card .nome-destaque{font-size:.92rem; font-weight:800; color:var(--texto); margin:2px 0 4px;}
+  .destaque-card .meta-destaque{font-size:.72rem; color:var(--texto-suave);}
+  .destaque-card .seta-destaque{font-size:1.4rem; color:var(--verde); font-weight:700;}
+
+  .login-hero{text-align:center; padding:26px 0 6px}
+  .login-hero .emoji{font-size:3rem; margin-bottom:10px; display:inline-block; filter:drop-shadow(0 6px 14px rgba(31,138,76,.22))}
+  .login-hero h1{font-size:1.55rem; margin-bottom:4px}
+  .login-hero .sub{margin-bottom:0}
+  .login-form-titulo{font-size:.78rem; font-weight:800; color:var(--verde-escuro); text-transform:uppercase; letter-spacing:.6px; margin-bottom:4px; display:flex; align-items:center; gap:6px;}
+  body.dark-mode .login-form-titulo{color:var(--verde)}
+
+  .tipo-toggle{display:flex; gap:6px; background:var(--barra-bg); padding:5px; border-radius:14px; margin-top:6px; transition:background .35s;}
+  .tipo-btn{flex:1; border:none; background:transparent; padding:12px 8px; border-radius:10px; font-size:.82rem; font-weight:700; color:var(--texto-suave); cursor:pointer; font-family:inherit; transition:all .2s;}
+  .tipo-btn:active{transform:scale(.97)}
+  .tipo-btn.ativo{background:var(--card-bg); color:var(--verde); box-shadow:0 2px 8px rgba(20,50,30,.1);}
+  body.dark-mode .tipo-btn.ativo{box-shadow:0 2px 8px rgba(0,0,0,.3);}
+
+  .metas-card{display:flex; align-items:center; justify-content:space-between; gap:12px; cursor:pointer; border-left:5px solid var(--amarelo); transition:transform .1s, box-shadow .2s;}
+  .metas-card:active{transform:scale(.98); box-shadow:var(--sombra-md)}
+  .metas-card .metas-seta{font-size:1.6rem; color:var(--verde); font-weight:700; line-height:1}
+
+  .pedidos-card{display:flex; align-items:center; justify-content:space-between; gap:12px; cursor:pointer; border-left:5px solid var(--verde); transition:transform .1s, box-shadow .2s;}
+  .pedidos-card:active{transform:scale(.98); box-shadow:var(--sombra-md)}
+  .pedidos-card .pedidos-info{flex:1}
+  .pedidos-card .contador-pedidos{background:var(--vermelho); color:#fff; font-size:.72rem; font-weight:800; padding:3px 9px; border-radius:12px; min-width:22px; text-align:center; margin-left:auto;}
+  .pedidos-card .metas-seta{font-size:1.6rem; color:var(--verde); font-weight:700; line-height:1}
+
+  .panel-title{display:flex; align-items:center; gap:8px; font-size:.92rem; font-weight:800; color:var(--texto); margin-bottom:4px; letter-spacing:-.2px;}
+  .panel-title .em{font-size:1.1rem}
+  .panel-hint{font-size:.76rem; color:var(--texto-suave); margin-bottom:4px; line-height:1.45}
+
+  .pedido-card{background:var(--card-bg); border:1px solid var(--borda); border-radius:var(--raio); padding:14px; margin-bottom:10px; border-left:5px solid var(--amarelo); box-shadow:var(--sombra-sm); transition:background .35s, border-color .35s;}
+  .pedido-card.concluido{border-left-color:var(--verde)}
+  .pedido-card.cancelado{border-left-color:var(--vermelho); opacity:.7}
+  .pedido-card .pedido-header{display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; gap:8px}
+  .pedido-card .pedido-id{font-size:.7rem; color:var(--texto-suave); font-weight:800; letter-spacing:.3px}
+  .pedido-card .pedido-produto{font-weight:800; font-size:.95rem; margin:4px 0; color:var(--texto)}
+  .pedido-card .pedido-info{font-size:.78rem; color:var(--texto-suave); line-height:1.55}
+  .pedido-card .pedido-footer{display:flex; justify-content:space-between; align-items:center; margin-top:10px; padding-top:10px; border-top:1px solid var(--borda); gap:8px}
+  .pedido-card .pedido-status{font-size:.66rem; font-weight:800; text-transform:uppercase; padding:4px 9px; border-radius:8px; letter-spacing:.4px}
+  .pedido-card .pedido-status.pendente{background:var(--selo-amarelo-bg); color:var(--selo-amarelo-color)}
+  .pedido-card .pedido-status.concluido{background:var(--selo-bg); color:var(--selo-color)}
+  .pedido-card .pedido-status.cancelado{background:var(--selo-vermelho-bg); color:var(--selo-vermelho-color)}
+  .pedido-card .btn-mini{font-size:.72rem; padding:7px 14px; border-radius:8px; border:none; font-weight:800; cursor:pointer; font-family:inherit; transition:transform .1s}
+  .pedido-card .btn-mini:active{transform:scale(.95)}
+  .pedido-card .btn-mini.primario{background:var(--verde); color:#fff}
+  .pedido-card .btn-mini.secundario{background:var(--barra-bg); color:var(--texto)}
+  .pedido-card .acoes{display:flex; gap:6px}
+  .pedido-codigo{background:var(--verde-suave); border:1px dashed var(--verde-claro); border-radius:8px; padding:6px 10px; font-family:'Courier New',monospace; font-weight:800; letter-spacing:2px; font-size:.78rem; color:var(--verde-escuro); display:inline-block; margin-top:6px}
+  body.dark-mode .pedido-codigo{color:var(--verde)}
+
+  /* NOVO: Origem badge para pedidos ONG */
+  .pedido-origem{
+    display:inline-flex; align-items:center; gap:4px;
+    background:var(--barra-bg); color:var(--texto-suave);
+    font-size:.62rem; font-weight:800; padding:3px 7px;
+    border-radius:6px; letter-spacing:.3px; margin-top:8px;
+  }
+
+  .quick-grid{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+  .quick-btn{background:var(--card-bg); border:1.5px solid var(--borda); border-radius:12px; padding:12px 8px; font-size:.74rem; font-weight:700; cursor:pointer; font-family:inherit; color:var(--texto); text-align:center; transition:all .2s}
+  .quick-btn:active{transform:scale(.96); background:var(--verde-suave)}
+  .quick-btn .q-ico{display:block; font-size:1.2rem; margin-bottom:3px}
+
+  .mapa-solidario{background:var(--mapa-bg); border-radius:var(--raio); height:220px; position:relative; overflow:hidden; margin-bottom:14px; border:1px solid var(--borda); transition:background .35s, border-color .35s;}
+  .mapa-solidario::before{content:''; position:absolute; background:rgba(255,255,255,.6); width:10px; height:100%; left:38%;}
+  .mapa-solidario::after{content:''; position:absolute; background:rgba(255,255,255,.6); width:100%; height:10px; top:42%;}
+  body.dark-mode .mapa-solidario::before,body.dark-mode .mapa-solidario::after{background:rgba(60,179,113,.25);}
+  body.alto-contraste .mapa-solidario::before,body.alto-contraste .mapa-solidario::after{background:#fff;}
+  .mapa-pin-solidario{position:absolute; font-size:1.4rem; cursor:pointer; z-index:2; filter:drop-shadow(0 3px 6px rgba(0,0,0,.28)); transition:transform .2s; background:var(--card-bg); width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:2px solid var(--verde);}
+  .mapa-pin-solidario:hover{transform:translate(-50%,-50%) scale(1.15) !important; z-index:3;}
+  .mapa-pin-solidario.urgente{border-color:var(--vermelho); animation:pulsePin 1.5s infinite; background:#fff;}
+  @keyframes pulsePin{0%,100%{box-shadow:0 0 0 0 rgba(214,69,69,.5)} 50%{box-shadow:0 0 0 10px rgba(214,69,69,0)}}
+  .mapa-legenda-solidaria{position:absolute; bottom:8px; left:8px; background:var(--card-bg); padding:6px 10px; border-radius:10px; font-size:.66rem; font-weight:800; box-shadow:var(--sombra-sm); display:flex; gap:8px; align-items:center; color:var(--texto);}
+  .mapa-legenda-solidaria .dot{width:7px; height:7px; border-radius:50%; background:var(--verde); display:inline-block;}
+  .mapa-legenda-solidaria .dot.urg{background:var(--vermelho); margin-left:6px;}
+  .filtros-solidario{display:grid; grid-template-columns:1fr 1fr; gap:8px;}
+  .filtros-solidario label{margin-top:0; font-size:.72rem;}
+  .filtros-solidario select{padding:10px 12px; font-size:.82rem;}
+  .doacao-solidaria{background:var(--card-bg); border:1px solid var(--borda); border-left:5px solid var(--verde); border-radius:var(--raio); padding:14px; margin-bottom:10px; box-shadow:var(--sombra-sm); display:flex; gap:12px; align-items:center; transition:transform .1s, box-shadow .2s, background .35s, border-color .35s;}
+  .doacao-solidaria:active{transform:scale(.98); box-shadow:var(--sombra-md)}
+  .doacao-solidaria.urgente{border-left-color:var(--vermelho); background:var(--btn-danger-bg);}
+  .doacao-solidaria .emoji-doacao{width:52px; height:52px; flex-shrink:0; background:var(--verde-claro); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.6rem;}
+  .doacao-solidaria.urgente .emoji-doacao{background:#fff;}
+  body.dark-mode .doacao-solidaria.urgente .emoji-doacao{background:#3a1a1a;}
+  .doacao-solidaria .info-doacao{flex:1; min-width:0;}
+  .doacao-solidaria .nome-doacao{font-weight:800; font-size:.92rem; color:var(--texto); line-height:1.3;}
+  .doacao-solidaria .detalhe-doacao{font-size:.76rem; color:var(--texto-suave); margin-top:3px; line-height:1.5;}
+  .doacao-solidaria .detalhe-doacao strong{color:var(--texto);}
+  .doacao-solidaria .btn-reservar{background:var(--verde); color:#fff; border:none; padding:9px 14px; border-radius:10px; font-size:.72rem; font-weight:800; cursor:pointer; font-family:inherit; white-space:nowrap; transition:transform .1s; flex-shrink:0;}
+  .doacao-solidaria .btn-reservar:active{transform:scale(.95)}
+  .badge-urgente{display:inline-block; background:var(--vermelho); color:#fff; font-size:.55rem; font-weight:800; padding:2px 6px; border-radius:6px; letter-spacing:.3px; margin-left:5px; text-transform:uppercase; vertical-align:middle;}
+
+  .nivel-card{background:linear-gradient(135deg,var(--verde-escuro),var(--verde)); color:#fff; border-radius:var(--raio); padding:20px 18px; margin-bottom:14px; position:relative; overflow:hidden; box-shadow:0 8px 24px rgba(31,138,76,.25);}
+  .nivel-card::after{content:''; position:absolute; width:160px; height:160px; background:rgba(255,255,255,.1); border-radius:50%; right:-50px; top:-50px;}
+  .nivel-card .nivel-label{font-size:.66rem; text-transform:uppercase; letter-spacing:1px; opacity:.9; font-weight:800;}
+  .nivel-card .nivel-titulo{font-size:1.4rem; font-weight:800; margin:4px 0 10px; letter-spacing:-.3px;}
+  .nivel-card .nivel-xp{font-size:.78rem; opacity:.95; margin-bottom:8px; font-weight:600;}
+  .nivel-card .nivel-barra{background:rgba(255,255,255,.25); height:9px; border-radius:5px; overflow:hidden; margin-bottom:6px;}
+  .nivel-card .nivel-barra > div{height:100%; background:var(--amarelo); border-radius:5px; transition:width .8s ease;}
+  .nivel-card .nivel-proximo{font-size:.7rem; opacity:.9; font-weight:600;}
+  .missao{background:var(--card-bg); border:1px solid var(--borda); border-radius:var(--raio); padding:14px; margin-bottom:10px; transition:background .35s, border-color .35s;}
+  .missao.concluida{border-color:var(--verde-claro); background:var(--verde-suave);}
+  .missao .missao-header{display:flex; align-items:center; gap:10px; margin-bottom:8px;}
+  .missao .missao-ico{width:40px; height:40px; flex-shrink:0; border-radius:10px; background:var(--verde-claro); display:flex; align-items:center; justify-content:center; font-size:1.2rem;}
+  .missao.concluida .missao-ico{background:var(--verde);}
+  .missao .missao-info{flex:1; min-width:0;}
+  .missao .missao-titulo{font-weight:800; font-size:.88rem; color:var(--texto); line-height:1.3;}
+  .missao .missao-desc{font-size:.72rem; color:var(--texto-suave); margin-top:2px; line-height:1.4;}
+  .missao .missao-check{font-size:1.3rem; color:var(--verde); font-weight:800; flex-shrink:0;}
+  .missao .missao-progresso{display:flex; align-items:center; gap:8px; margin-top:8px;}
+  .missao .missao-progresso .barra{flex:1; margin:0;}
+  .missao .missao-progresso .txt{font-size:.72rem; font-weight:800; color:var(--texto-suave); min-width:44px; text-align:right;}
+  .missao .missao-recompensa{margin-top:10px; padding-top:10px; border-top:1px dashed var(--borda); font-size:.72rem; color:var(--verde-escuro); font-weight:700; display:flex; align-items:center; gap:6px;}
+  body.dark-mode .missao .missao-recompensa{color:var(--verde)}
+  .beneficio-item{display:flex; align-items:flex-start; gap:10px; padding:12px 0; border-bottom:1px solid var(--borda); font-size:.82rem;}
+  .beneficio-item:last-child{border-bottom:none}
+  .beneficio-item .b-ico{width:34px; height:34px; flex-shrink:0; border-radius:9px; background:var(--verde-claro); display:flex; align-items:center; justify-content:center; font-size:1rem;}
+  .beneficio-item .b-info{flex:1; min-width:0;}
+  .beneficio-item .b-titulo{font-weight:800; color:var(--texto); font-size:.84rem;}
+  .beneficio-item .b-desc{font-size:.72rem; color:var(--texto-suave); margin-top:2px; line-height:1.4;}
+  .beneficio-item .b-status{font-size:.6rem; font-weight:800; text-transform:uppercase; padding:4px 8px; border-radius:8px; letter-spacing:.4px; flex-shrink:0; align-self:center;}
+  .beneficio-item .b-status.ativo{background:var(--selo-bg); color:var(--selo-color);}
+  .beneficio-item .b-status.bloqueado{background:var(--barra-bg); color:var(--texto-suave);}
+</style>
+</head>
+<body>
+<div class="phone">
+
+  <div class="splash" id="splash">
+    <div class="logo">REAPROVEIT<span>A</span></div>
+    <div class="slogan">Menos desperdício, mais conexão, mais cuidado.</div>
+    <div class="load"><div></div></div>
+  </div>
+
+  <header>
+    <div class="logo">REAPROVEIT<span>A</span></div>
+    <div class="acoes-topo">
+      <button class="icone-btn" onclick="abrirNotificacoes()" title="Notificações">
+        🔔<span class="badge" id="badgeNotif">2</span>
+      </button>
+      <button class="icone-btn" onclick="irPara('telaConfig')" title="Configurações">⚙️</button>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ LOGIN ============ -->
+    <section class="screen active" id="telaLogin">
+      <div class="login-hero">
+        <div class="emoji">♻️</div>
+        <h1>REAPROVEITA</h1>
+        <p class="sub">Escolha sua categoria e entre na plataforma.</p>
+      </div>
+
+      <div class="card">
+        <label>Categoria / Persona</label>
+        <select id="loginPersonaSelect" onchange="setPersona(this.value)">
+          <option value="loja">🏪 Loja · Comerciante</option>
+          <option value="ong">🤝 ONG · Instituição</option>
+          <option value="cliente">👤 Cliente · Comprador</option>
+          <option value="dev">👨‍💻 Dev · Desenvolvedor</option>
+        </select>
+        <div class="persona-preview" id="personaPreview"></div>
+        <label>Nome / Identificação</label>
+        <input type="text" id="loginId" placeholder="Seu nome ou CNPJ" autocomplete="username">
+        <label>Senha</label>
+        <input type="password" id="loginSenha" placeholder="••••••••" autocomplete="current-password">
+        <button class="btn btn-primary" style="margin-top:18px" onclick="fazerLogin()">Entrar</button>
+      </div>
+      <button class="btn btn-ghost" onclick="irPara('telaCadastro')">➕ Criar nova conta</button>
+      <p class="sub" style="text-align:center;font-size:.72rem;margin-top:16px;opacity:.7">
+        Versão demo · Sem envio real de dados
+      </p>
+    </section>
+
+    <!-- CADASTRO -->
+    <section class="screen" id="telaCadastro">
+      <button class="voltar" onclick="irPara('telaLogin')">‹ Voltar</button>
+      <h1>Criar conta</h1>
+      <p class="sub">Cadastro rápido e seguro.</p>
+      <div class="card">
+        <label>Nome / Razão social</label>
+        <input type="text" id="cadNome" placeholder="Ex.: Padaria Pão Dourado">
+        <div class="msg-erro" id="erroNome">Informe o nome.</div>
+        <label>Tipo de perfil</label>
+        <select id="cadTipo">
+          <option value="loja">Loja / Comerciante</option>
+          <option value="ong">ONG / Instituição</option>
+          <option value="cliente">Cliente</option>
+          <option value="dev">Desenvolvedor</option>
+        </select>
+        <label>Telefone / WhatsApp</label>
+        <input type="tel" id="cadTelefone" placeholder="(11) 99999-9999">
+        <div class="msg-erro" id="erroTelefone">Informe um telefone válido.</div>
+        <label>Endereço / Bairro</label>
+        <input type="text" id="cadEndereco" placeholder="Ex.: Vila Mariana, São Paulo">
+        <div class="check">
+          <input type="checkbox" id="cadTermos">
+          <div><strong>Termos de responsabilidade sanitária</strong><br>Declaro que os alimentos doados estarão próprios para consumo humano.</div>
+        </div>
+        <button class="btn btn-primary" style="margin-top:18px" onclick="finalizarCadastro()">✅ Criar conta</button>
+      </div>
+    </section>
+
+    <!-- DASHBOARD LOJA -->
+    <section class="screen" id="telaDashComerciante">
+      <h1>Olá, Padaria Pão Dourado 👋</h1>
+      <p class="sub">Seu painel comercial.</p>
+      <div class="kpis">
+        <div class="kpi"><div class="num" id="dashVendidos">128</div><div class="lbl">itens vendidos</div></div>
+        <div class="kpi"><div class="num" id="dashDoados">42</div><div class="lbl">itens doados</div></div>
+      </div>
+      <div class="card metas-card" onclick="abrirMetas()">
+        <div>
+          <strong style="font-size:1rem">🎯 Metas do mês</strong>
+          <p class="sub" style="margin:4px 0 0;font-size:.78rem">Acompanhe metas comerciais e sociais</p>
+        </div>
+        <span class="metas-seta">→</span>
+      </div>
+      <div class="card pedidos-card" onclick="abrirPedidos('telaDashComerciante')">
+        <div class="pedidos-info">
+          <strong style="font-size:1rem">📥 Pedidos Recebidos</strong>
+          <p class="sub" style="margin:4px 0 0;font-size:.78rem">Compras e reservas do menu de vendas</p>
+        </div>
+        <span class="contador-pedidos" id="badgePedidosDash" style="display:none">0</span>
+        <span class="metas-seta">→</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:6px" onclick="navegarAba('vendas')">🛒 Ir para Vendas</button>
+      <button class="btn btn-secondary" style="margin-top:8px" onclick="navegarAba('destaques')">⭐ Ver Missões e Destaques</button>
+      <h2>Últimas ofertas</h2>
+      <div id="historicoDashComerciante"></div>
+    </section>
+
+    <!-- DASHBOARD ONG -->
+    <section class="screen" id="telaDashInstituicao">
+      <h1>Olá, Lar Esperança 👋</h1>
+      <p class="sub">Seu painel de recebimentos.</p>
+      <div class="kpis">
+        <div class="kpi"><div class="num">32</div><div class="lbl">kg recebidos</div></div>
+        <div class="kpi"><div class="num">7</div><div class="lbl">doações recebidas</div></div>
+      </div>
+      <button class="btn btn-primary" onclick="navegarAba('solidario')">🗺️ Abrir Mapa Solidário</button>
+      <button class="btn btn-secondary" style="margin-top:8px" onclick="navegarAba('loja')">🛍️ Loja Solidária</button>
+      <button class="btn btn-secondary" style="margin-top:8px" onclick="navegarAba('pedidos')">📋 Meus Pedidos (<span id="ongPendentesDash">0</span>)</button>
+      <h2>Últimas doações recebidas</h2>
+      <div class="card">
+        <div class="oferta" style="cursor:default;margin:0">
+          <div class="topo"><span class="nome">Pães e panificados</span><span class="selo">Recebida</span></div>
+          <div class="info">4 kg · Padaria Pão Dourado · ontem</div>
+        </div>
+        <div class="oferta" style="cursor:default;margin:10px 0 0">
+          <div class="topo"><span class="nome">Laticínios</span><span class="selo">Recebida</span></div>
+          <div class="info">2 kg · Mercado Bom Preço · há 2 dias</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ NOVO: PEDIDOS DA ONG ============ -->
+    <section class="screen" id="telaPedidosONG">
+      <h1>Meus Pedidos 📋</h1>
+      <p class="sub">Acompanhe suas reservas e compras.</p>
+
+      <div class="kpis">
+        <div class="kpi"><div class="num" id="ongTotalPedidos">0</div><div class="lbl">total</div></div>
+        <div class="kpi"><div class="num" id="ongPendentes">0</div><div class="lbl">pendentes</div></div>
+      </div>
+
+      <div class="card" style="padding:12px">
+        <label style="margin-top:0">Filtrar por status</label>
+        <select id="filtroStatusPedidoONG" onchange="renderPedidosONG()">
+          <option value="todos">Todos</option>
+          <option value="pendente">Aguardando retirada</option>
+          <option value="concluido">Retirados</option>
+          <option value="cancelado">Cancelados</option>
+        </select>
+      </div>
+
+      <div id="listaPedidosONG"></div>
+    </section>
+
+    <!-- MAPA SOLIDÁRIO -->
+    <section class="screen" id="telaMapaSolidario">
+      <h1>Mapa Solidário 🗺️</h1>
+      <p class="sub">Doações gratuitas de comerciantes próximos a você.</p>
+      <div class="mapa-solidario" id="mapaSolidario"></div>
+      <div class="card" style="padding:14px">
+        <div class="filtros-solidario">
+          <div>
+            <label style="margin-top:0">📍 Raio de distância</label>
+            <select id="filtroRaioSolidario" onchange="renderMapaSolidario()">
+              <option value="99999">Todos</option>
+              <option value="500">Até 500 m</option>
+              <option value="1000">Até 1 km</option>
+              <option value="2000">Até 2 km</option>
+              <option value="5000">Até 5 km</option>
+            </select>
+          </div>
+          <div>
+            <label style="margin-top:0">⏰ Prioridade</label>
+            <select id="filtroPrioridadeSolidario" onchange="renderMapaSolidario()">
+              <option value="validade">Validade (mais próxima)</option>
+              <option value="distancia">Distância (mais perto)</option>
+              <option value="quantidade">Quantidade (maior)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div id="listaDoacoesSolidarias"></div>
+    </section>
+
+    <!-- DASHBOARD CLIENTE -->
+    <section class="screen" id="telaDashCliente">
+      <h1>Olá, Maria 👋</h1>
+      <p class="sub">Seu impacto como comprador consciente.</p>
+      <div class="kpis">
+        <div class="kpi"><div class="num">18</div><div class="lbl">compras</div></div>
+        <div class="kpi"><div class="num">R$ 87</div><div class="lbl">economizados</div></div>
+      </div>
+      <div class="card destaque" style="text-align:center">
+        <div style="font-size:2rem">🌱</div>
+        <strong>Você já salvou 6 kg de alimentos</strong>
+        <p class="sub" style="margin:6px 0 0">Obrigado por apoiar o consumo consciente!</p>
+      </div>
+      <button class="btn btn-primary" style="margin-top:6px" onclick="navegarAba('loja')">🛍️ Ir para a Loja</button>
+      <h2>Últimas compras</h2>
+      <div class="card">
+        <div class="oferta" style="cursor:default;margin:0">
+          <div class="topo"><span class="nome">Cesta de Pães Artesanais</span><span class="selo">Entregue</span></div>
+          <div class="info">R$ 12,90 · Padaria Pão Dourado · ontem</div>
+        </div>
+        <div class="oferta" style="cursor:default;margin:10px 0 0">
+          <div class="topo"><span class="nome">Kit Frutas e Legumes Frescos</span><span class="selo">Entregue</span></div>
+          <div class="info">R$ 18,50 · Mercado Bom Preço · há 3 dias</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DASHBOARD DEV -->
+    <section class="screen" id="telaDashDev">
+      <h1>Dev Console 👨‍💻</h1>
+      <p class="sub">Acesso total · Simulador de personas</p>
+      <div class="kpis">
+        <div class="kpi"><div class="num">4</div><div class="lbl">personas</div></div>
+        <div class="kpi"><div class="num">17</div><div class="lbl">telas</div></div>
+      </div>
+      <h2>Trocar de persona</h2>
+      <div class="persona-grid" style="gap:8px">
+        <button class="persona-card" onclick="trocarPersonaDev('loja')"><span class="icone-p">🏪</span><span class="nome-p">Loja</span></button>
+        <button class="persona-card" onclick="trocarPersonaDev('ong')"><span class="icone-p">🤝</span><span class="nome-p">ONG</span></button>
+        <button class="persona-card" onclick="trocarPersonaDev('cliente')"><span class="icone-p">👤</span><span class="nome-p">Cliente</span></button>
+        <button class="persona-card ativo" onclick="trocarPersonaDev('dev')"><span class="icone-p">👨‍💻</span><span class="nome-p">Dev</span></button>
+      </div>
+      <h2>Acesso rápido</h2>
+      <div class="quick-grid">
+        <button class="quick-btn" onclick="navegarAba('vendas')"><span class="q-ico">🛒</span>Vendas</button>
+        <button class="quick-btn" onclick="navegarAba('loja')"><span class="q-ico">🛍️</span>Loja</button>
+        <button class="quick-btn" onclick="navegarAba('solidario')"><span class="q-ico">🗺️</span>Solidário</button>
+        <button class="quick-btn" onclick="navegarAba('impacto')"><span class="q-ico">📈</span>Impacto</button>
+        <button class="quick-btn" onclick="navegarAba('dashboard')"><span class="q-ico">📊</span>Dashboard</button>
+        <button class="quick-btn" onclick="navegarAba('destaques')"><span class="q-ico">⭐</span>Missões</button>
+        <button class="quick-btn" onclick="navegarAba('suporte')"><span class="q-ico">💬</span>Suporte</button>
+      </div>
+    </section>
+
+    <!-- VENDAS -->
+    <section class="screen" id="telaDashEstab">
+      <h1>Vendas 🛒</h1>
+      <p class="sub">Publique excedentes e acompanhe o histórico.</p>
+      <div class="kpis">
+        <div class="kpi"><div class="num" id="dashKg">12</div><div class="lbl">kg doados</div></div>
+        <div class="kpi"><div class="num" id="dashDoacoes">4</div><div class="lbl">doações</div></div>
+      </div>
+      <button class="btn btn-primary" onclick="irPara('tela2')">📤 Publicar novo excedente</button>
+      <button class="btn btn-secondary" style="margin-top:10px" onclick="abrirPedidos('telaDashEstab')">📥 Ver Pedidos Recebidos (<span id="contadorPedidosVendas">0</span>)</button>
+      <h2>Últimas ofertas</h2>
+      <div id="historicoEstab"></div>
+      <h2>Selos conquistados</h2>
+      <div class="card destaque" style="text-align:center">
+        <div style="font-size:2rem">🏅</div>
+        <strong>Selo Parceiro Responsável</strong>
+        <p class="sub" style="margin:6px 0 0">Você já doou mais de 10 kg. Obrigado por cuidar!</p>
+      </div>
+    </section>
+
+    <!-- PUBLICAR -->
+    <section class="screen" id="tela2">
+      <button class="voltar" onclick="irPara('telaDashEstab')">‹ Voltar</button>
+      <h1>Publicar Excedente</h1>
+      <p class="sub">Escolha o tipo e detalhe o produto.</p>
+      <div class="card">
+        <label style="margin-top:0">Tipo de publicação</label>
+        <div class="tipo-toggle">
+          <button class="tipo-btn ativo" data-tipo="doacao" onclick="setTipoPublicacao('doacao')">🤝 Doação</button>
+          <button class="tipo-btn" data-tipo="venda" onclick="setTipoPublicacao('venda')">💰 Venda Solidária</button>
+        </div>
+        <div id="campoPreco" style="display:none">
+          <label>Preço solidário (R$)</label>
+          <input type="text" id="precoSolidario" placeholder="Ex.: 9,90">
+        </div>
+      </div>
+      <div class="card">
+        <div class="panel-title"><span class="em">📋</span> Detalhes do produto</div>
+        <p class="panel-hint">Descreva a qualidade para a instituição avaliar.</p>
+        <label>Nome do produto</label>
+        <input type="text" id="nomeProduto" placeholder="Ex.: Pão francês integral">
+        <div class="msg-erro" id="erroNomeProduto">Informe o nome do produto.</div>
+        <label>Categoria do alimento</label>
+        <select id="tipoAlimento">
+          <option>Pães e panificados</option>
+          <option>Frutas e legumes</option>
+          <option>Refeições prontas</option>
+          <option>Laticínios</option>
+          <option>Grãos e cereais</option>
+        </select>
+        <label>Quantidade (kg ou unidades)</label>
+        <input type="text" id="qtdAlimento" placeholder="Ex.: 5 kg de pães">
+        <div class="msg-erro" id="erroQtd">Informe a quantidade.</div>
+        <label>Descrição detalhada da qualidade</label>
+        <textarea id="qualidadeProduto" rows="3" placeholder="Textura, sabor, aparência, ingredientes..."></textarea>
+      </div>
+      <div class="card">
+        <div class="panel-title"><span class="em">❄️</span> Como armazenar</div>
+        <label>Condições de armazenamento</label>
+        <textarea id="armazenamento" rows="2" placeholder="Ex.: Manter refrigerado entre 2°C e 6°C..."></textarea>
+      </div>
+      <div class="card">
+        <div class="panel-title"><span class="em">📅</span> Validade e Prazo</div>
+        <label>Data de validade do produto</label>
+        <input type="date" id="validadeProduto">
+        <label>⏰ Data e hora limite da oferta *</label>
+        <input type="datetime-local" id="limiteOferta">
+        <div class="msg-erro" id="erroLimite">Informe data e hora limite.</div>
+      </div>
+      <div class="card">
+        <div class="check">
+          <input type="checkbox" id="checkSanitario">
+          <div><strong>Checklist de segurança sanitária</strong><br>Alimento embalado, íntegro e próprio para consumo humano.</div>
+        </div>
+        <div class="msg-erro" id="erroCheck">Marque o checklist para publicar.</div>
+        <button class="btn btn-primary" style="margin-top:18px" onclick="publicarOferta()">📤 Publicar</button>
+      </div>
+    </section>
+
+    <!-- OFERTAS -->
+    <section class="screen" id="tela3">
+      <h1>Ofertas Próximas</h1>
+      <p class="sub">Filtre por distância, categoria e prazo.</p>
+      <div class="card" style="padding:12px">
+        <label style="margin-top:0">Filtrar por categoria</label>
+        <select id="filtroCategoria" onchange="renderOfertas()">
+          <option value="todas">Todas</option>
+          <option value="Pães e panificados">Pães e panificados</option>
+          <option value="Frutas e legumes">Frutas e legumes</option>
+          <option value="Refeições prontas">Refeições prontas</option>
+          <option value="Laticínios">Laticínios</option>
+        </select>
+        <label>Distância máxima</label>
+        <select id="filtroDistancia" onchange="renderOfertas()">
+          <option value="999">Qualquer distância</option>
+          <option value="500">Até 500 m</option>
+          <option value="1000">Até 1 km</option>
+          <option value="2000">Até 2 km</option>
+        </select>
+      </div>
+      <div id="listaOfertas"></div>
+      <p class="sub" id="contadorOfertas" style="text-align:center"></p>
+    </section>
+
+    <!-- DETALHE -->
+    <section class="screen" id="tela4">
+      <button class="voltar" onclick="irPara('tela3')">‹ Voltar às ofertas</button>
+      <h1>Detalhes da Oferta</h1>
+      <div id="alertaDetalhe"></div>
+      <div class="mapa"><div class="pin">📍</div></div>
+      <div class="card" id="detalheOferta"></div>
+      <div id="campoRetirada">
+        <label>Horário combinado de retirada</label>
+        <input type="time" id="horarioCombinado" value="19:30">
+        <button class="btn btn-primary" style="margin-top:18px" onclick="confirmarDoacao()">✅ Confirmar Retirada</button>
+        <button class="btn btn-danger" onclick="abrirRecusa()">Recusar oferta inadequada</button>
+      </div>
+    </section>
+
+    <!-- RECUSA -->
+    <section class="screen" id="telaRecusa">
+      <button class="voltar" onclick="irPara('tela4')">‹ Voltar</button>
+      <h1>Motivo da recusa</h1>
+      <p class="sub">Sua segurança vem primeiro.</p>
+      <div class="card">
+        <label>Selecione o motivo</label>
+        <select id="motivoRecusa">
+          <option>Condições de conservação inadequadas</option>
+          <option>Quantidade acima da capacidade</option>
+          <option>Prazo de retirada muito curto</option>
+          <option>Alimento não compatível com a necessidade</option>
+        </select>
+        <label>Observação (opcional)</label>
+        <textarea id="obsRecusa" rows="3" placeholder="Descreva brevemente..."></textarea>
+        <button class="btn btn-danger" style="margin-top:18px" onclick="confirmarRecusa()">Confirmar recusa</button>
+      </div>
+    </section>
+
+    <!-- CONFIRMAÇÃO -->
+    <section class="screen" id="telaConfirmacao">
+      <h1>Pedido confirmado! 🎉</h1>
+      <p class="sub">Apresente o código abaixo na retirada.</p>
+      <div class="codigo" id="codigoRetirada">A1B2C3</div>
+      <div class="card">
+        <strong>Resumo</strong>
+        <p class="sub" style="margin:8px 0 0" id="resumoDoacao"></p>
+      </div>
+      <button class="btn btn-primary" onclick="abrirChat()">💬 Falar com o doador</button>
+      <button class="btn btn-secondary" onclick="voltarAoInicioOuLoja()">Voltar</button>
+    </section>
+
+    <!-- CHAT -->
+    <section class="screen" id="telaChat">
+      <button class="voltar" onclick="voltarAoInicioOuLoja()">‹ Voltar</button>
+      <h1>Chat da doação</h1>
+      <p class="sub">Combine detalhes da retirada.</p>
+      <div class="chat" id="chatBox"></div>
+      <div class="chat-input">
+        <input type="text" id="chatMsg" placeholder="Digite uma mensagem...">
+        <button onclick="enviarMensagem()">Enviar</button>
+      </div>
+    </section>
+
+    <!-- PEDIDOS (SHOP) -->
+    <section class="screen" id="telaPedidos">
+      <button class="voltar" id="voltarPedidos" onclick="irPara('telaDashComerciante')">‹ Voltar</button>
+      <h1>Pedidos Recebidos 📥</h1>
+      <p class="sub">Compras e reservas realizadas no menu de vendas.</p>
+      <div class="kpis">
+        <div class="kpi"><div class="num" id="totalPedidos">0</div><div class="lbl">total</div></div>
+        <div class="kpi"><div class="num" id="pedidosPendentes">0</div><div class="lbl">pendentes</div></div>
+      </div>
+      <div class="card" style="padding:12px">
+        <label style="margin-top:0">Filtrar por status</label>
+        <select id="filtroStatusPedido" onchange="renderPedidos()">
+          <option value="todos">Todos</option>
+          <option value="pendente">Pendentes</option>
+          <option value="concluido">Concluídos</option>
+          <option value="cancelado">Cancelados</option>
+        </select>
+      </div>
+      <div id="listaPedidos"></div>
+    </section>
+
+    <!-- LOJA -->
+    <section class="screen" id="telaLoja">
+      <h1 id="lojaTitulo">Loja Solidária 🛍️</h1>
+      <p class="sub" id="lojaSubtitulo">Compre excedentes com desconto. Parte do valor financia as doações.</p>
+      <div class="loja-busca">
+        <span>🔍</span>
+        <input type="text" id="buscaLoja" placeholder="Buscar produtos, categorias..." oninput="renderLoja()">
+      </div>
+      <div class="loja-banner">
+        <div>
+          <span class="tag-promo">FLASH SALE</span>
+          <h3>Até 60% OFF</h3>
+          <p>⏱ Termina em 02:14:33</p>
+        </div>
+        <div class="icone-banner">🎁</div>
+      </div>
+      <div class="loja-categorias">
+        <button class="cat-pill ativo" data-cat="todas" onclick="filtrarLoja('todas')">Todas</button>
+        <button class="cat-pill" data-cat="Pães" onclick="filtrarLoja('Pães')">Pães</button>
+        <button class="cat-pill" data-cat="Frutas" onclick="filtrarLoja('Frutas')">Frutas</button>
+        <button class="cat-pill" data-cat="Refeições" onclick="filtrarLoja('Refeições')">Refeições</button>
+        <button class="cat-pill" data-cat="Kits" onclick="filtrarLoja('Kits')">Kits</button>
+      </div>
+      <div class="loja-grade" id="gradeLoja"></div>
+    </section>
+
+    <!-- DASHBOARD -->
+    <section class="screen" id="telaDashboard">
+      <h1>Dashboard 📊</h1>
+      <p class="sub">Análise detalhada do seu desempenho.</p>
+      <div class="kpis">
+        <div class="kpi"><div class="num" id="dbVendas">128</div><div class="lbl">vendas totais</div></div>
+        <div class="kpi"><div class="num" id="dbTicket">R$ 15</div><div class="lbl">ticket médio</div></div>
+        <div class="kpi"><div class="num" id="dbDoacoes">42</div><div class="lbl">doações</div></div>
+        <div class="kpi"><div class="num" id="dbConversoes">4→3</div><div class="lbl">conversão</div></div>
+      </div>
+      <div class="card">
+        <strong style="font-size:.95rem">📦 Distribuição por categoria</strong>
+        <div id="dbCategorias" style="margin-top:12px"></div>
+      </div>
+      <h2>Ranking de parceiros</h2>
+      <div class="card" id="rankingDash"></div>
+      <button class="btn btn-primary" onclick="exportarRelatorio()">📄 Exportar relatório completo</button>
+    </section>
+
+    <!-- DESTAQUES LOJA -->
+    <section class="screen" id="telaDestaquesLoja">
+      <h1>Destaques & Missões ⭐</h1>
+      <p class="sub">Complete missões para aparecer cada vez mais no app e na comunidade.</p>
+      <div class="nivel-card" id="nivelCard">
+        <div class="nivel-label">SEU NÍVEL DE VISIBILIDADE</div>
+        <div class="nivel-titulo" id="nivelTitulo">Parceiro Bronze</div>
+        <div class="nivel-xp" id="nivelXp">150 / 500 XP</div>
+        <div class="nivel-barra"><div id="nivelBarra" style="width:30%"></div></div>
+        <div class="nivel-proximo" id="nivelProximo">Faltam 350 XP para Prata 🥈</div>
+      </div>
+      <h2 style="margin-top:6px">🎯 Missões ativas</h2>
+      <div id="listaMissoes"></div>
+      <h2>🎁 Benefícios atuais</h2>
+      <div class="card" id="listaBeneficios"></div>
+      <h2>🏆 Próximos níveis</h2>
+      <div class="card" id="proximosNiveis"></div>
+    </section>
+
+    <!-- DESTAQUES CLIENTE -->
+    <section class="screen" id="telaDestaques">
+      <h1>Destaques ⭐</h1>
+      <p class="sub">Os produtos mais procurados da Loja Solidária.</p>
+      <h2 style="margin-top:0">🔥 Mais vendidos</h2>
+      <div id="listaDestaques"></div>
+      <div class="card destaque">
+        <strong>🌱 Por que comprar aqui?</strong>
+        <p class="sub" style="margin:8px 0 0">Cada compra evita desperdício e financia doações para instituições sociais. Preços até 60% menores que no varejo.</p>
+      </div>
+      <button class="btn btn-primary" onclick="navegarAba('loja')">🛍️ Ver todos os produtos</button>
+    </section>
+
+    <!-- SUPORTE -->
+    <section class="screen" id="telaSuporte">
+      <h1>Suporte 💬</h1>
+      <p class="sub">Estamos aqui para ajudar.</p>
+      <h2 style="margin-top:0">Perguntas frequentes</h2>
+      <details class="faq-item"><summary>Como funciona a Loja Solidária?</summary><div class="faq-content">Produtos com desconto de até 60% vendidos por parceiros locais. Cada compra apoia a operação e financia doações para instituições cadastradas.</div></details>
+      <details class="faq-item"><summary>Como recebo meu pedido?</summary><div class="faq-content">Após a confirmação, você recebe um código de retirada. Leve o código ao ponto parceiro no horário combinado.</div></details>
+      <details class="faq-item"><summary>Como funciona o reembolso?</summary><div class="faq-content">Em caso de produto inadequado, você pode recusar na hora da retirada. O valor é reembolsado integralmente em até 5 dias úteis.</div></details>
+      <details class="faq-item"><summary>Preciso de cadastro para comprar?</summary><div class="faq-content">Sim, um cadastro rápido de nome + senha é suficiente. Não pedimos dados sensíveis.</div></details>
+      <h2>Fale com a gente</h2>
+      <button class="btn btn-primary" onclick="mostrarToast('💬 Chat de suporte em breve!')">💬 Abrir chat de suporte</button>
+      <button class="btn btn-secondary" onclick="mostrarToast('📧 Envie para: suporte@reaproveita.app')">📧 Enviar e-mail</button>
+    </section>
+
+    <!-- IMPACTO -->
+    <section class="screen" id="tela5">
+      <h1>Painel de Impacto</h1>
+      <p class="sub">Indicadores do piloto em tempo real.</p>
+      <div class="kpis">
+        <div class="kpi"><div class="num" id="kgDoados">15</div><div class="lbl">kg doados</div></div>
+        <div class="kpi"><div class="num" id="doacoes">3</div><div class="lbl">doações concluídas</div></div>
+        <div class="kpi"><div class="num" id="estabs">2</div><div class="lbl">estabelecimentos</div></div>
+        <div class="kpi"><div class="num" id="tempo">45</div><div class="lbl">min tempo médio</div></div>
+      </div>
+      <div class="card">
+        <strong>Proporção de ofertas que resultam em doação</strong>
+        <div class="barra"><div id="barraDoacao" style="width:75%"></div></div>
+        <span style="font-size:.8rem;color:var(--texto-suave)"><span id="pctDoacao">75</span>% das ofertas publicadas são concluídas</span>
+      </div>
+      <h2>Ranking de parceiros</h2>
+      <div class="card" id="ranking"></div>
+      <h2>Patrocinadores</h2>
+      <div class="card destaque">
+        <strong>🌱 Empresas apoiadoras</strong>
+        <p class="sub" style="margin:8px 0 0">Financiam a operação. Doações gratuitas para instituições. O patrocinador não compra prioridade.</p>
+        <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+          <span class="selo">Mercado Verde</span>
+          <span class="selo amarelo">Transportes Já</span>
+          <span class="selo">Padaria Central</span>
+        </div>
+      </div>
+      <button class="btn btn-secondary" onclick="exportarRelatorio()">📄 Exportar relatório</button>
+    </section>
+
+    <!-- RELATÓRIO -->
+    <section class="screen" id="telaRelatorio">
+      <button class="voltar" onclick="voltarAoInicioOuLoja()">‹ Voltar</button>
+      <h1>Relatório de Impacto</h1>
+      <p class="sub">Gerado em tempo real para patrocinadores.</p>
+      <div class="relatorio" id="conteudoRelatorio"></div>
+      <button class="btn btn-primary" style="margin-top:14px" onclick="mostrarToast('Relatório enviado para os patrocinadores!')">📧 Enviar aos patrocinadores</button>
+    </section>
+
+    <!-- NOTIFICAÇÕES -->
+    <section class="screen" id="telaNotif">
+      <button class="voltar" onclick="voltarAoInicioOuLoja()">‹ Voltar</button>
+      <h1>Notificações</h1>
+      <div id="listaNotif"></div>
+    </section>
+
+    <!-- CONFIGURAÇÕES -->
+    <section class="screen" id="telaConfig">
+      <button class="voltar" onclick="voltarAoInicioOuLoja()">‹ Voltar</button>
+      <h1>Configurações</h1>
+      <p class="sub">Acessibilidade, privacidade e preferências.</p>
+      <div class="card">
+        <strong>🌓 Tema do aplicativo</strong>
+        <p class="sub" style="margin:8px 0">Escolha entre modo claro e escuro.</p>
+        <div class="acess" style="margin-top:0">
+          <button id="btnTemaClaro" onclick="definirTema('claro')" style="flex:1">☀️ Claro</button>
+          <button id="btnTemaEscuro" onclick="definirTema('escuro')" style="flex:1">🌙 Escuro</button>
+        </div>
+        <div class="tema-indicador" id="temaIndicador">
+          <span class="bolinha"></span>
+          <span id="temaTexto">Modo claro ativado</span>
+        </div>
+      </div>
+      <div class="card">
+        <strong>Acessibilidade</strong>
+        <div class="acess">
+          <button id="btnFonte" onclick="toggleFonte()">🔠 Aumentar fonte</button>
+          <button id="btnContraste" onclick="toggleContraste()">🌓 Alto contraste</button>
+        </div>
+      </div>
+      <div class="card">
+        <strong>Modo offline</strong>
+        <p class="sub" style="margin:8px 0">Ofertas salvas no aparelho são sincronizadas quando houver conexão.</p>
+        <button class="btn btn-secondary" onclick="simularOffline()">📶 Simular publicação offline</button>
+        <p class="sub" id="statusOffline" style="margin-top:10px">Status: online</p>
+      </div>
+      <div class="card">
+        <strong>Privacidade e dados</strong>
+        <p class="sub" style="margin:8px 0">Seus dados são usados apenas para conectar doações e gerar indicadores anônimos.</p>
+        <button class="btn btn-ghost" onclick="mostrarToast('Política de privacidade aberta (simulação).')">📜 Ver política de privacidade</button>
+      </div>
+      <h2 style="color:var(--vermelho)">Zona de risco</h2>
+      <div class="card zona-risco">
+        <strong>⚠️ Redefinir dados do app</strong>
+        <p class="sub" style="margin:8px 0 14px;color:var(--vermelho)">
+          Apaga todas as ofertas, doações, notificações e histórico salvos neste dispositivo e restaura o app ao estado inicial.
+          Esta ação não pode ser desfeita.
+        </p>
+        <button class="btn btn-danger" onclick="abrirModalRedefinir()">🔄 Redefinir dados do app</button>
+        <p class="sub" style="margin-top:10px;font-size:.72rem;text-align:center">
+          Última redefinição: <span id="ultimaRedefinicao">nunca</span>
+        </p>
+      </div>
+      <div class="card">
+        <strong>Sobre o REAPROVEITA</strong>
+        <p class="sub" style="margin:8px 0 0">Conecta excedentes de alimentos a instituições sociais com segurança, prazo e registro de impacto. Doações gratuitas para quem recebe.</p>
+      </div>
+      <button class="btn btn-danger" style="margin-top:14px" onclick="fazerLogout()">🚪 Sair da conta</button>
+    </section>
+
+  </main>
+
+  <nav class="tabs" id="tabs"></nav>
+
+  <div class="loja-carrinho" id="lojaCarrinho">
+    <div class="info-cart">
+      <span class="ico-cart">🛒</span>
+      <div class="txt-cart">
+        <strong id="cartQtdTxt">0 itens</strong>
+        <small id="cartTotalTxt">R$ 0,00</small>
+      </div>
+    </div>
+    <button class="btn-finalizar" onclick="finalizarCompra()">Finalizar</button>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <div class="modal" id="modalRedefinir">
+    <div class="modal-box">
+      <div class="icone-alerta">⚠️</div>
+      <h3>Redefinir todos os dados?</h3>
+      <p>Isso apagará <strong>ofertas, doações, notificações e histórico</strong> salvos neste dispositivo e restaurará o app ao estado inicial. Esta ação não pode ser desfeita.</p>
+      <div class="botoes">
+        <button class="btn btn-cancelar" onclick="fecharModalRedefinir()">Cancelar</button>
+        <button class="btn btn-confirmar" id="btnConfirmarRedefinir" onclick="executarRedefinir()" disabled>Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const PERSONAS = {
+    loja: {
+      nome: 'Loja', icone: '🏪', descricao: 'Comerciante',
+      descMenus: 'Vendas · Dashboard · Destaques · Impacto',
+      tabs: [
+        { id: 'inicio', icon: '🏠', label: 'Início', screen: 'telaDashComerciante' },
+        { id: 'vendas', icon: '🛒', label: 'Vendas', screen: 'telaDashEstab' },
+        { id: 'destaques', icon: '⭐', label: 'Destaques', screen: 'telaDestaquesLoja' },
+        { id: 'impacto', icon: '📈', label: 'Impacto', screen: 'tela5' },
+        { id: 'dashboard', icon: '📊', label: 'Dash', screen: 'telaDashboard' },
+        { id: 'config', icon: '⚙️', label: 'Ajustes', screen: 'telaConfig' }
+      ]
+    },
+    ong: {
+      nome: 'ONG', icone: '🤝', descricao: 'Instituição',
+      descMenus: 'Mapa Solidário · Pedidos · Loja · Impacto',
+      tabs: [
+        { id: 'inicio', icon: '🏠', label: 'Início', screen: 'telaDashInstituicao' },
+        { id: 'solidario', icon: '🗺️', label: 'Solidário', screen: 'telaMapaSolidario' },
+        { id: 'pedidos', icon: '📋', label: 'Pedidos', screen: 'telaPedidosONG' },
+        { id: 'loja', icon: '🛍️', label: 'Loja', screen: 'telaLoja' },
+        { id: 'impacto', icon: '📈', label: 'Impacto', screen: 'tela5' },
+        { id: 'config', icon: '⚙️', label: 'Ajustes', screen: 'telaConfig' }
+      ]
+    },
+    cliente: {
+      nome: 'Cliente', icone: '👤', descricao: 'Comprador',
+      descMenus: 'Loja · Destaques · Suporte',
+      tabs: [
+        { id: 'inicio', icon: '🏠', label: 'Início', screen: 'telaDashCliente' },
+        { id: 'loja', icon: '🛍️', label: 'Loja', screen: 'telaLoja' },
+        { id: 'destaques', icon: '⭐', label: 'Destaques', screen: 'telaDestaques' },
+        { id: 'suporte', icon: '💬', label: 'Suporte', screen: 'telaSuporte' },
+        { id: 'config', icon: '⚙️', label: 'Ajustes', screen: 'telaConfig' }
+      ]
+    },
+    dev: {
+      nome: 'Dev', icone: '👨‍💻', descricao: 'Desenvolvedor',
+      descMenus: 'Acesso total a todos os menus',
+      tabs: [
+        { id: 'inicio', icon: '🏠', label: 'Início', screen: 'telaDashDev' },
+        { id: 'vendas', icon: '🛒', label: 'Vendas', screen: 'telaDashEstab' },
+        { id: 'solidario', icon: '🗺️', label: 'Solidário', screen: 'telaMapaSolidario' },
+        { id: 'pedidos', icon: '📋', label: 'Pedidos', screen: 'telaPedidosONG' },
+        { id: 'loja', icon: '🛍️', label: 'Loja', screen: 'telaLoja' },
+        { id: 'impacto', icon: '📈', label: 'Impacto', screen: 'tela5' },
+        { id: 'dashboard', icon: '📊', label: 'Dash', screen: 'telaDashboard' },
+        { id: 'destaques', icon: '⭐', label: 'Missões', screen: 'telaDestaquesLoja' },
+        { id: 'suporte', icon: '💬', label: 'Suporte', screen: 'telaSuporte' },
+        { id: 'config', icon: '⚙️', label: 'Ajustes', screen: 'telaConfig' }
+      ]
+    }
+  };
+
+  const SCREEN_TO_TAB = {
+    telaDashComerciante:'inicio', telaDashInstituicao:'inicio',
+    telaDashCliente:'inicio', telaDashDev:'inicio',
+    telaDashEstab:'vendas', tela2:'vendas',
+    tela3:'vendas', tela4:'vendas', telaChat:'vendas',
+    telaRecusa:'vendas', telaConfirmacao:'vendas', telaPedidos:'vendas',
+    telaPedidosONG:'pedidos',
+    telaLoja:'loja',
+    telaMapaSolidario:'solidario',
+    tela5:'impacto', telaRelatorio:'dashboard',
+    telaDashboard:'dashboard',
+    telaDestaques:'destaques', telaDestaquesLoja:'destaques',
+    telaSuporte:'suporte',
+    telaConfig:'config', telaNotif:'config', telaCadastro:'config'
+  };
+
+  function horasAFrente(h){ return new Date(Date.now() + h*3600*1000).toISOString(); }
+
+  function estadoInicial(){
+    return {
+      persona: null, logado: false, ofertaAtual: null,
+      kgTotal: 15, doacoesTotal: 3, ofertasPublicadas: 4, tempoMedio: 45, instituicoesAtendidas: 2,
+      itensVendidos: 128, itensDoados: 42,
+      pedidos: [],
+      notificacoes: [
+        { titulo: 'Nova oferta compatível próxima a você', texto: 'Padaria Pão Dourado publicou 5 kg de pães. Retirada até 20:00.', tempo: 'há 2 min' },
+        { titulo: 'Doação concluída', texto: 'Sua doação de frutas chegou ao Lar Esperança. Obrigado!', tempo: 'há 1 h' }
+      ],
+      ofertasFixas: [
+        { tipo: 'Frutas e legumes', qtd: '8 kg de frutas', prazo: '18:30', local: 'Mercado Bom Preço', distancia: 1200, conservacao: 'Refrigerado', limite: horasAFrente(2) }
+      ],
+      historico: [
+        { tipo: 'Pães e panificados', qtd: '4 kg', status: 'Concluída' },
+        { tipo: 'Laticínios', qtd: '2 kg', status: 'Concluída' }
+      ],
+      doacoesSolidarias: [
+        { id:'D1', produto:'Pães artesanais', qtd:'5 kg', comercio:'Padaria Pão Dourado', distancia:350, validade:horasAFrente(2), emoji:'🥖', tipo:'Pães' },
+        { id:'D2', produto:'Frutas e legumes variados', qtd:'8 kg', comercio:'Mercado Bom Preço', distancia:1200, validade:horasAFrente(6), emoji:'🍎', tipo:'Frutas' },
+        { id:'D3', produto:'Refeições prontas', qtd:'12 porções', comercio:'Restaurante Sabor', distancia:800, validade:horasAFrente(1.5), emoji:'🍱', tipo:'Refeições' },
+        { id:'D4', produto:'Laticínios variados', qtd:'3 kg', comercio:'Padaria Central', distancia:2100, validade:horasAFrente(24), emoji:'🧀', tipo:'Laticínios' },
+        { id:'D5', produto:'Bolo caseiro', qtd:'2 un.', comercio:'Doce Lar Confeitaria', distancia:600, validade:horasAFrente(4), emoji:'🎂', tipo:'Pães' },
+        { id:'D6', produto:'Saladas frescas', qtd:'6 porções', comercio:'Restaurante Sabor', distancia:800, validade:horasAFrente(0.5), emoji:'🥗', tipo:'Refeições' }
+      ],
+      nivel: { nome:'Parceiro Bronze', xp:150, xpProximo:500, proximo:'Prata', ico:'🥈' },
+      missoes: [
+        { id:'m1', ico:'🤝', titulo:'Faça 5 doações este mês', desc:'Doe excedentes para instituições parceiras', progresso:3, meta:5, recompensa:'+50 XP · +5% visibilidade', concluida:false },
+        { id:'m2', ico:'📤', titulo:'Publique 10 ofertas', desc:'Publique ofertas de doação ou venda solidária', progresso:4, meta:10, recompensa:'+30 XP · Selo Ativo', concluida:false },
+        { id:'m3', ico:'📅', titulo:'Informe validade em todas as ofertas', desc:'Transparência total com a instituição', progresso:2, meta:5, recompensa:'+40 XP · Selo Confiável', concluida:false },
+        { id:'m4', ico:'⚡', titulo:'Responda em menos de 1h', desc:'Rápido para quem precisa', progresso:4, meta:5, recompensa:'+25 XP · Prioridade em buscas', concluida:false },
+        { id:'m5', ico:'🏅', titulo:'Conclua 5 entregas', desc:'Pedidos confirmados e entregues', progresso:5, meta:5, recompensa:'+60 XP · Selo Entregador', concluida:true }
+      ],
+      beneficios: [
+        { ico:'🔍', titulo:'Prioridade em buscas', desc:'Seu estabelecimento aparece primeiro nas buscas da Loja', ativo:true },
+        { ico:'📌', titulo:'Selo no perfil', desc:'Selo de parceiro responsável visível no perfil', ativo:true },
+        { ico:'📢', titulo:'Destaque na home', desc:'Aparição na seção "Destaques da Semana"', ativo:false },
+        { ico:'🎁', titulo:'Bônus de visibilidade', desc:'+10% de aparições em busca por tempo limitado', ativo:false }
+      ]
+    };
+  }
+
+  let estado = estadoInicial();
+  let fonteGrande = false;
+  let temaEscuro = false;
+  let loginPersona = 'loja';
+  let ultimaTelaOrigem = 'telaDashComerciante';
+
+  let produtosLoja = [
+    { id:1, nome:'Cesta de Pães Artesanais', cat:'Pães', emoji:'🥖', preco:12.90, precoV:25.00, desconto:48, avaliacao:4.8, vendidos:120, local:'Padaria Pão Dourado' },
+    { id:2, nome:'Kit Frutas e Legumes Frescos', cat:'Frutas', emoji:'🍎', preco:18.50, precoV:32.00, desconto:42, avaliacao:4.7, vendidos:85, local:'Mercado Bom Preço' },
+    { id:3, nome:'Combo Refeições Congeladas', cat:'Refeições', emoji:'🍱', preco:24.90, precoV:45.00, desconto:45, avaliacao:4.9, vendidos:200, local:'Restaurante Sabor' },
+    { id:4, nome:'Caixa Surpresa do Dia', cat:'Kits', emoji:'🎁', preco:15.00, precoV:40.00, desconto:62, avaliacao:4.6, vendidos:310, local:'Vários parceiros' },
+    { id:5, nome:'Laticínios Selecionados 2kg', cat:'Kits', emoji:'🧀', preco:19.90, precoV:35.00, desconto:43, avaliacao:4.7, vendidos:64, local:'Padaria Central' },
+    { id:6, nome:'Pães Integrais (pacote)', cat:'Pães', emoji:'🍞', preco:8.90, precoV:16.00, desconto:44, avaliacao:4.8, vendidos:150, local:'Padaria Pão Dourado' },
+    { id:7, nome:'Bolo Caseiro Assado', cat:'Pães', emoji:'🎂', preco:22.00, precoV:38.00, desconto:42, avaliacao:4.9, vendidos:42, local:'Padaria Central' },
+    { id:8, nome:'Salada Fresca Pronta', cat:'Refeições', emoji:'🥗', preco:11.50, precoV:20.00, desconto:42, avaliacao:4.5, vendidos:77, local:'Restaurante Sabor' }
+  ];
+  let carrinho = [];
+  let lojaCat = 'todas';
+
+  function brl(v){ return 'R$ ' + v.toFixed(2).replace('.', ','); }
+
+  function estaEsgotada(o){
+    if(!o || !o.limite) return false;
+    try { return new Date(o.limite) < new Date(); } catch(e){ return false; }
+  }
+  function formatarLimite(limite){
+    if(!limite) return '—';
+    try {
+      const d = new Date(limite);
+      return d.toLocaleDateString('pt-BR', {day:'2-digit', month:'2-digit'}) + ' às ' +
+             d.toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
+    } catch(e){ return limite; }
+  }
+  function isUrgenteSolidaria(validade){
+    try { return new Date(validade) - new Date() < 2*3600*1000; } catch(e){ return false; }
+  }
+  function verificarEsgotadas(){
+    if(estado.ofertaAtual && estaEsgotada(estado.ofertaAtual) && !estado.ofertaAtual._esgotadaNotif){
+      estado.ofertaAtual._esgotadaNotif = true;
+      estado.notificacoes.unshift({
+        titulo: 'Oferta esgotada',
+        texto: `${estado.ofertaAtual.nome || estado.ofertaAtual.tipo} expirou.`,
+        tempo: 'agora'
+      });
+      atualizarBadge();
+    }
+  }
+
+  // ============ NOVO: helper identificador de pedidos da ONG ============
+  function ehPedidoDaONG(p){
+    return p && p.comprador && p.comprador.startsWith('Lar Esperança');
+  }
+
+  function carregarTema(){
+    const salvo = localStorage.getItem('reaproveita-tema');
+    if(salvo === 'escuro'){ temaEscuro = true; document.body.classList.add('dark-mode'); }
+    atualizarBotoesTema();
+  }
+  function salvarTema(){ localStorage.setItem('reaproveita-tema', temaEscuro ? 'escuro' : 'claro'); }
+  function definirTema(tema){
+    temaEscuro = (tema === 'escuro');
+    document.body.classList.toggle('dark-mode', temaEscuro);
+    atualizarBotoesTema(); salvarTema();
+    mostrarToast(temaEscuro ? '🌙 Modo escuro ativado' : '☀️ Modo claro ativado');
+  }
+  function atualizarBotoesTema(){
+    const btnClaro = document.getElementById('btnTemaClaro');
+    const btnEscuro = document.getElementById('btnTemaEscuro');
+    const texto = document.getElementById('temaTexto');
+    if(!btnClaro || !btnEscuro) return;
+    btnClaro.classList.toggle('ativo', !temaEscuro);
+    btnEscuro.classList.toggle('ativo', temaEscuro);
+    if(texto) texto.textContent = temaEscuro ? 'Modo escuro ativado' : 'Modo claro ativado';
+  }
+
+  function irPara(id){
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    const el = document.getElementById(id);
+    if(el){ el.classList.add('active'); }
+    document.getElementById('main').scrollTop = 0;
+    atualizarCarrinho();
+    const isAuth = (id === 'telaLogin' || id === 'telaCadastro');
+    document.getElementById('tabs').style.display = isAuth ? 'none' : 'flex';
+    const tabId = SCREEN_TO_TAB[id];
+    document.querySelectorAll('.tab').forEach(t => t.classList.toggle('ativo', t.dataset.tab === tabId));
+    if(id === 'telaLoja') atualizarTituloLoja();
+  }
+
+  function atualizarTituloLoja(){
+    const titulo = document.getElementById('lojaTitulo');
+    const sub = document.getElementById('lojaSubtitulo');
+    if(!titulo) return;
+    if(estado.persona === 'ong'){
+      titulo.textContent = 'Loja Solidária 🤝';
+      if(sub) sub.textContent = 'Produtos a preço de custo para sua instituição.';
+    } else {
+      titulo.textContent = 'Loja Solidária 🛍️';
+      if(sub) sub.textContent = 'Compre excedentes com desconto. Parte do valor financia doações.';
+    }
+  }
+
+  function renderTabs(){
+    const persona = estado.persona;
+    if(!persona) return;
+    const config = PERSONAS[persona];
+    const tabsEl = document.getElementById('tabs');
+    tabsEl.classList.toggle('scrollable', config.tabs.length > 5);
+
+    tabsEl.innerHTML = config.tabs.map(t => {
+      let badgeHtml = '';
+      if(t.id === 'loja' && carrinho.length > 0){
+        badgeHtml = `<span class="tab-badge">${carrinho.length}</span>`;
+      }
+      if(t.id === 'vendas'){
+        const pend = estado.pedidos.filter(p => p.status === 'pendente').length;
+        if(pend > 0) badgeHtml = `<span class="tab-badge">${pend}</span>`;
+      }
+      // NOVO: badge pedidos ONG
+      if(t.id === 'pedidos'){
+        const pend = estado.pedidos.filter(p => ehPedidoDaONG(p) && p.status === 'pendente').length;
+        if(pend > 0) badgeHtml = `<span class="tab-badge">${pend}</span>`;
+      }
+      return `<button class="tab" data-tab="${t.id}" onclick="navegarAba('${t.id}')">
+        <span class="ico">${t.icon}</span>${t.label}${badgeHtml}
+      </button>`;
+    }).join('');
+  }
+
+  function navegarAba(abaId){
+    if(!estado.persona) return;
+    const config = PERSONAS[estado.persona];
+    const tab = config.tabs.find(t => t.id === abaId);
+    if(!tab) return;
+
+    if(abaId === 'loja') renderLoja();
+    if(abaId === 'vendas'){
+      if(estado.persona === 'loja' || estado.persona === 'dev') renderHistorico();
+      else renderOfertas();
+    }
+    if(abaId === 'impacto') renderRanking();
+    if(abaId === 'dashboard') renderDashboard();
+    if(abaId === 'solidario') renderMapaSolidario();
+    // NOVO: pedidos ONG
+    if(abaId === 'pedidos'){ renderPedidosONG(); irPara('telaPedidosONG'); return; }
+    if(abaId === 'destaques'){
+      if(estado.persona === 'cliente'){ renderDestaques(); irPara('telaDestaques'); }
+      else { renderDestaquesLoja(); irPara('telaDestaquesLoja'); }
+      return;
+    }
+
+    irPara(tab.screen);
+  }
+
+  function voltarAoInicioOuLoja(){
+    if(!estado.persona){ irPara('telaLogin'); return; }
+    const config = PERSONAS[estado.persona];
+    const inicio = config.tabs.find(t => t.id === 'inicio');
+    if(inicio) irPara(inicio.screen);
+    else irPara('telaLogin');
+  }
+
+  setTimeout(() => document.getElementById('splash').classList.add('hide'), 1500);
+
+  function mostrarToast(msg){
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => t.classList.remove('show'), 2400);
+  }
+
+  function setPersona(persona){
+    loginPersona = persona;
+    const sel = document.getElementById('loginPersonaSelect');
+    if(sel && sel.value !== persona) sel.value = persona;
+    renderPreviewPersona();
+  }
+
+  function renderPreviewPersona(){
+    const config = PERSONAS[loginPersona];
+    const preview = document.getElementById('personaPreview');
+    if(!preview || !config) return;
+    preview.innerHTML = `
+      <span class="pp-ico">${config.icone}</span>
+      <div class="pp-info">
+        <span class="pp-nome">${config.nome} · ${config.descricao}</span>
+        <span class="pp-desc">${config.descMenus}</span>
+      </div>
+    `;
+  }
+
+  function fazerLogin(){
+    const id = document.getElementById('loginId').value.trim();
+    const senha = document.getElementById('loginSenha').value.trim();
+    if(!id || !senha){ mostrarToast('⚠️ Preencha identificação e senha.'); return; }
+
+    estado.persona = loginPersona;
+    estado.logado = true;
+
+    renderTabs();
+    renderHistorico();
+    renderHistoricoDashComerciante();
+    renderOfertas();
+    renderPedidos();
+    renderPedidosONG();
+    atualizarBadge();
+
+    const config = PERSONAS[loginPersona];
+    const inicioTab = config.tabs.find(t => t.id === 'inicio');
+    if(inicioTab) irPara(inicioTab.screen);
+    else irPara('telaLogin');
+
+    mostrarToast(`✅ Bem-vindo(a), ${config.nome}!`);
+  }
+
+  function fazerLogout(){
+    estado.persona = null;
+    estado.logado = false;
+    document.getElementById('loginId').value = '';
+    document.getElementById('loginSenha').value = '';
+    document.getElementById('tabs').style.display = 'none';
+    irPara('telaLogin');
+    mostrarToast('👋 Você saiu da conta.');
+  }
+
+  function trocarPersonaDev(persona){
+    if(persona === 'dev'){ mostrarToast('Você já é Dev 😎'); return; }
+    estado.persona = persona;
+    renderTabs();
+    const config = PERSONAS[persona];
+    const inicio = config.tabs.find(t => t.id === 'inicio');
+    if(inicio) irPara(inicio.screen);
+    mostrarToast(`🔄 Persona alterada para ${config.nome}`);
+  }
+
+  function finalizarCadastro(){
+    const nome = document.getElementById('cadNome');
+    const tel = document.getElementById('cadTelefone');
+    const termos = document.getElementById('cadTermos');
+    let ok = true;
+    document.getElementById('erroNome').classList.remove('show');
+    document.getElementById('erroTelefone').classList.remove('show');
+    nome.classList.remove('erro'); tel.classList.remove('erro');
+    if(!nome.value.trim()){ nome.classList.add('erro'); document.getElementById('erroNome').classList.add('show'); ok = false; }
+    if(tel.value.trim().length < 8){ tel.classList.add('erro'); document.getElementById('erroTelefone').classList.add('show'); ok = false; }
+    if(!termos.checked){ mostrarToast('⚠️ Aceite os termos sanitários.'); ok = false; }
+    if(!ok) return;
+
+    const tipo = document.getElementById('cadTipo').value;
+    setPersona(tipo);
+    document.getElementById('loginId').value = nome.value.trim();
+    document.getElementById('loginSenha').value = 'demo123';
+    mostrarToast('✅ Conta criada! Faça login.');
+    setTimeout(() => { fazerLogin(); }, 600);
+  }
+
+  function renderHistorico(){
+    const el = document.getElementById('historicoEstab');
+    if(el){
+      el.innerHTML = estado.historico.map(h => `
+        <div class="oferta" style="cursor:default">
+          <div class="topo"><span class="nome">${h.tipo}</span><span class="selo">${h.status}</span></div>
+          <div class="info">${h.qtd} doados</div>
+        </div>
+      `).join('');
+    }
+    const dKg = document.getElementById('dashKg');
+    const dDoa = document.getElementById('dashDoacoes');
+    if(dKg) dKg.textContent = estado.kgTotal;
+    if(dDoa) dDoa.textContent = estado.doacoesTotal;
+  }
+  function renderHistoricoDashComerciante(){
+    const el = document.getElementById('historicoDashComerciante');
+    if(el){
+      el.innerHTML = estado.historico.map(h => `
+        <div class="oferta" style="cursor:default">
+          <div class="topo"><span class="nome">${h.tipo}</span><span class="selo">${h.status}</span></div>
+          <div class="info">${h.qtd} doados</div>
+        </div>
+      `).join('');
+    }
+    const v = document.getElementById('dashVendidos');
+    const d = document.getElementById('dashDoados');
+    if(v) v.textContent = estado.itensVendidos;
+    if(d) d.textContent = estado.itensDoados;
+  }
+  function abrirMetas(){ mostrarToast('🎯 Metas — em desenvolvimento 🚧'); }
+
+  function setTipoPublicacao(tipo){
+    document.querySelectorAll('.tipo-btn').forEach(b => b.classList.toggle('ativo', b.dataset.tipo === tipo));
+    const campoPreco = document.getElementById('campoPreco');
+    if(campoPreco){ campoPreco.style.display = (tipo === 'venda') ? 'block' : 'none'; }
+  }
+
+  function publicarOferta(){
+    const nomeProd = document.getElementById('nomeProduto')?.value.trim();
+    const tipo = document.getElementById('tipoAlimento')?.value;
+    const qtd = document.getElementById('qtdAlimento');
+    const qualidade = document.getElementById('qualidadeProduto')?.value.trim();
+    const armazenamento = document.getElementById('armazenamento')?.value.trim();
+    const validade = document.getElementById('validadeProduto')?.value;
+    const limite = document.getElementById('limiteOferta')?.value;
+    const check = document.getElementById('checkSanitario');
+    const tipoPublicacao = document.querySelector('.tipo-btn.ativo')?.dataset.tipo || 'doacao';
+    const preco = document.getElementById('precoSolidario')?.value.trim();
+
+    ['erroQtd','erroCheck','erroLimite'].forEach(id => document.getElementById(id)?.classList.remove('show'));
+    document.getElementById('erroNomeProduto')?.classList.remove('show');
+    qtd.classList.remove('erro');
+
+    let ok = true;
+    if(!nomeProd){ document.getElementById('erroNomeProduto').classList.add('show'); ok = false; }
+    if(!qtd.value.trim()){ qtd.classList.add('erro'); document.getElementById('erroQtd').classList.add('show'); ok = false; }
+    if(!check.checked){ document.getElementById('erroCheck').classList.add('show'); ok = false; }
+    if(!limite){ document.getElementById('erroLimite').classList.add('show'); ok = false; }
+    if(!ok) return;
+
+    if(new Date(limite) <= new Date()){
+      document.getElementById('erroLimite').textContent = 'Data limite deve ser futura.';
+      document.getElementById('erroLimite').classList.add('show');
+      return;
+    }
+
+    const prazo = new Date(limite).toTimeString().slice(0,5);
+    estado.ofertaAtual = {
+      tipo, qtd: qtd.value, prazo, limite,
+      nome: nomeProd, qualidade, armazenamento, validade,
+      tipoPublicacao, preco,
+      local:'Padaria Pão Dourado', distancia:350,
+      conservacao: armazenamento || 'Embalado',
+      _esgotadaNotif: false
+    };
+    estado.ofertasPublicadas++;
+    if(tipoPublicacao === 'venda'){ estado.itensVendidos += 1; }
+    else { estado.itensDoados += 1; }
+
+    estado.notificacoes.unshift({
+      titulo: 'Oferta publicada com sucesso',
+      texto: `${nomeProd} (${qtd.value}) — ${tipoPublicacao === 'venda' ? 'Venda Solidária' : 'Doação'} até ${formatarLimite(limite)}.`,
+      tempo: 'agora'
+    });
+    atualizarBadge();
+    renderHistoricoDashComerciante();
+    mostrarToast('✅ Oferta publicada! Instituições notificadas.');
+    setTimeout(() => { renderOfertas(); irPara('tela3'); }, 900);
+  }
+
+  function renderOfertas(){
+    verificarEsgotadas();
+    const cat = document.getElementById('filtroCategoria')?.value || 'todas';
+    const dist = parseInt(document.getElementById('filtroDistancia')?.value || '999');
+    let ofertas = [];
+    if(estado.ofertaAtual) ofertas.push({...estado.ofertaAtual, nova: !estado.ofertaAtual._esgotadaNotif});
+    ofertas = ofertas.concat(estado.ofertasFixas);
+    ofertas = ofertas.filter(o => (cat === 'todas' || o.tipo === cat) && o.distancia <= dist);
+
+    const lista = document.getElementById('listaOfertas');
+    if(!lista) return;
+    if(ofertas.length === 0){
+      lista.innerHTML = `<div class="vazio"><div class="ico">🔍</div>Nenhuma oferta encontrada com esses filtros.</div>`;
+    } else {
+      lista.innerHTML = ofertas.map(o => {
+        const nome = o.nome || o.tipo;
+        const esgotada = estaEsgotada(o);
+        const tipoLabel = o.tipoPublicacao === 'venda' ? `💰 ${o.preco ? 'R$ '+o.preco : 'Venda'}` : '🤝 Doação';
+        const selo = esgotada ? 'ESGOTADA' : (o.nova ? 'NOVA' : 'COMPATÍVEL');
+        const seloClass = esgotada ? 'esgotada-selo' : (o.nova ? 'amarelo' : '');
+        return `
+        <div class="oferta ${esgotada ? 'esgotada' : ''}" onclick="${esgotada ? '' : `abrirOferta(${JSON.stringify(o).replace(/'/g,"&#39;")})`}">
+          <div class="topo"><span class="nome">${nome}</span><span class="selo ${seloClass}">${selo}</span></div>
+          <div class="info">
+            ${o.qtd} · ${tipoLabel}<br>
+            ${esgotada ? '⛔ <strong>Esgotada</strong> em ' + formatarLimite(o.limite) : 'Limite: ' + formatarLimite(o.limite)}<br>
+            📍 ${o.local} · ${formatarDist(o.distancia)}<br>
+            ✔ ${o.conservacao}
+          </div>
+        </div>`;
+      }).join('');
+    }
+    document.getElementById('contadorOfertas').textContent = `${ofertas.length} oferta(s) encontrada(s)`;
+  }
+  function formatarDist(m){ return m < 1000 ? m + ' m' : (m/1000).toFixed(1).replace('.',',') + ' km'; }
+
+  function abrirOferta(o){
+    if(typeof o === 'string') o = JSON.parse(o);
+    if(estaEsgotada(o)){ mostrarToast('⛔ Oferta esgotada. Prazo expirado.'); return; }
+    estado.ofertaAtual = o;
+
+    const tipoLabel = o.tipoPublicacao === 'venda'
+      ? `<strong style="color:var(--verde)">💰 Venda Solidária ${o.preco ? '· R$ '+o.preco : ''}</strong>`
+      : `<strong style="color:var(--verde)">🤝 Doação gratuita</strong>`;
+
+    document.getElementById('alertaDetalhe').innerHTML = '';
+    document.getElementById('campoRetirada').style.display = 'block';
+    document.getElementById('detalheOferta').innerHTML = `
+      <strong style="font-size:1.08rem">${o.nome || o.tipo}</strong>
+      <p class="sub" style="margin:8px 0 4px">${o.qtd}</p>
+      <p style="margin-bottom:8px">${tipoLabel}</p>
+      <p style="font-size:.84rem;color:var(--texto-suave);line-height:1.6">
+        📍 ${o.local} · ${formatarDist(o.distancia)}<br>
+        ⏰ Limite: <strong style="color:var(--vermelho)">${formatarLimite(o.limite)}</strong><br>
+        ❄️ ${o.conservacao}${o.validade ? '<br>📅 Validade: '+o.validade : ''}${o.qualidade ? '<br>📋 '+o.qualidade : ''}
+        <br>✔ Checklist sanitário confirmado
+      </p>`;
+    irPara('tela4');
+  }
+
+  function confirmarDoacao(){
+    if(estaEsgotada(estado.ofertaAtual)){ mostrarToast('⛔ Esta oferta já esgotou.'); return; }
+    const kg = parseInt(estado.ofertaAtual.qtd) || 5;
+    estado.kgTotal += kg;
+    estado.doacoesTotal++;
+    estado.tempoMedio = Math.max(20, estado.tempoMedio - 3);
+
+    const codigo = Math.random().toString(36).substring(2,8).toUpperCase();
+    const tipo = estado.ofertaAtual.tipoPublicacao || 'doacao';
+
+    estado.pedidos.unshift({
+      id: 'PED' + Math.floor(Math.random()*9000+1000),
+      produto: estado.ofertaAtual.nome || estado.ofertaAtual.tipo,
+      qtd: estado.ofertaAtual.qtd, tipo,
+      preco: estado.ofertaAtual.preco || '',
+      comprador: estado.persona === 'ong' ? 'Lar Esperança' : 'Cliente ' + (Math.random()*999|0),
+      quando: new Date().toLocaleString('pt-BR'),
+      status: 'pendente', codigo,
+      comercio: estado.ofertaAtual.local,
+      origem: 'Oferta'
+    });
+
+    document.getElementById('kgDoados').textContent = estado.kgTotal;
+    document.getElementById('doacoes').textContent = estado.doacoesTotal;
+    document.getElementById('tempo').textContent = estado.tempoMedio;
+    const pct = Math.min(100, Math.round((estado.doacoesTotal / estado.ofertasPublicadas) * 100));
+    document.getElementById('pctDoacao').textContent = pct;
+    document.getElementById('barraDoacao').style.width = pct + '%';
+
+    document.getElementById('codigoRetirada').textContent = codigo;
+    document.getElementById('resumoDoacao').innerHTML =
+      `${estado.ofertaAtual.nome || estado.ofertaAtual.tipo} · ${estado.ofertaAtual.qtd}<br>
+       ${tipo === 'venda' ? 'Venda Solidária' + (estado.ofertaAtual.preco ? ' · R$ '+estado.ofertaAtual.preco : '') : 'Doação gratuita'}<br>
+       Limite: ${formatarLimite(estado.ofertaAtual.limite)} · ${estado.ofertaAtual.local}`;
+
+    estado.historico.unshift({ tipo: estado.ofertaAtual.tipo, qtd: estado.ofertaAtual.qtd, status:'Concluída' });
+    estado.notificacoes.unshift({
+      titulo: 'Novo pedido recebido',
+      texto: `${estado.ofertaAtual.nome || estado.ofertaAtual.tipo} · ${estado.ofertaAtual.qtd} · Pedido ${codigo}.`,
+      tempo: 'agora'
+    });
+
+    estado.ofertaAtual = null;
+    atualizarBadge();
+    atualizarContadorPedidos();
+    renderPedidos();
+    renderPedidosONG();
+    renderTabs();
+    irPara('telaConfirmacao');
+    mostrarToast('✅ Pedido confirmado!');
+  }
+
+  function abrirRecusa(){ irPara('telaRecusa'); }
+  function confirmarRecusa(){
+    const motivo = document.getElementById('motivoRecusa').value;
+    mostrarToast('Oferta recusada: ' + motivo);
+    estado.notificacoes.unshift({ titulo: 'Oferta recusada', texto: motivo, tempo: 'agora' });
+    atualizarBadge();
+    setTimeout(() => { renderOfertas(); irPara('tela3'); }, 800);
+  }
+
+  function abrirChat(){
+    document.getElementById('chatBox').innerHTML = `
+      <div class="msg inst">Olá! Confirmamos a retirada para 19:30. Pode ser?<small>Instituição · agora</small></div>
+      <div class="msg doador">Perfeito! Vou deixar embalado e separado.<small>Padaria · agora</small></div>
+    `;
+    irPara('telaChat');
+  }
+  function enviarMensagem(){
+    const inp = document.getElementById('chatMsg');
+    if(!inp.value.trim()) return;
+    const box = document.getElementById('chatBox');
+    const div = document.createElement('div');
+    div.className = 'msg inst';
+    div.innerHTML = `${inp.value}<small>Você · agora</small>`;
+    box.appendChild(div);
+    inp.value = '';
+    box.scrollTop = box.scrollHeight;
+    setTimeout(() => {
+      const resp = document.createElement('div');
+      resp.className = 'msg doador';
+      resp.innerHTML = `Combinado! Obrigado pela parceria. 🙌<small>Padaria · agora</small>`;
+      box.appendChild(resp);
+      box.scrollTop = box.scrollHeight;
+    }, 900);
+  }
+
+  function renderMapaSolidario(){
+    const raio = parseInt(document.getElementById('filtroRaioSolidario')?.value || '99999');
+    const prioridade = document.getElementById('filtroPrioridadeSolidario')?.value || 'validade';
+
+    let doacoes = estado.doacoesSolidarias.filter(d => d.distancia <= raio);
+
+    if(prioridade === 'validade'){
+      doacoes.sort((a,b) => new Date(a.validade) - new Date(b.validade));
+    } else if(prioridade === 'distancia'){
+      doacoes.sort((a,b) => a.distancia - b.distancia);
+    } else {
+      doacoes.sort((a,b) => parseFloat(b.qtd) - parseFloat(a.qtd));
+    }
+
+    const mapa = document.getElementById('mapaSolidario');
+    if(mapa){
+      let pinsHtml = '';
+      doacoes.forEach((d, i) => {
+        const urgente = isUrgenteSolidaria(d.validade);
+        const angle = (i * 137.5) * Math.PI / 180;
+        const r = Math.min(44, (d.distancia / (raio === 99999 ? 5000 : raio)) * 35 + 8);
+        const x = 50 + Math.cos(angle) * r;
+        const y = 50 + Math.sin(angle) * r;
+        pinsHtml += `<div class="mapa-pin-solidario ${urgente ? 'urgente' : ''}" 
+          style="left:${x}%;top:${y}%;transform:translate(-50%,-50%)"
+          title="${d.produto} · ${d.comercio}">${d.emoji}</div>`;
+      });
+      pinsHtml += `<div class="mapa-legenda-solidaria">
+        <span class="dot"></span> ${doacoes.length} doações
+        <span class="dot urg"></span> urgente
+      </div>`;
+      mapa.innerHTML = pinsHtml;
+    }
+
+    const lista = document.getElementById('listaDoacoesSolidarias');
+    if(!lista) return;
+
+    if(doacoes.length === 0){
+      lista.innerHTML = `<div class="vazio"><div class="ico">🔍</div>Nenhuma doação neste raio. Aumente o filtro.</div>`;
+      return;
+    }
+
+    lista.innerHTML = doacoes.map(d => {
+      const urgente = isUrgenteSolidaria(d.validade);
+      const diff = Math.max(0, new Date(d.validade) - new Date());
+      const horas = Math.floor(diff / 3600000);
+      const mins = Math.floor((diff % 3600000) / 60000);
+      const validadeTxt = horas > 0 ? `${horas}h ${mins}min` : `${mins}min`;
+      return `
+        <div class="doacao-solidaria ${urgente ? 'urgente' : ''}">
+          <div class="emoji-doacao">${d.emoji}</div>
+          <div class="info-doacao">
+            <div class="nome-doacao">${d.produto}${urgente ? '<span class="badge-urgente">Urgente</span>' : ''}</div>
+            <div class="detalhe-doacao">
+              <strong>${d.qtd}</strong> · ${d.comercio}<br>
+              📍 ${formatarDist(d.distancia)} · ⏰ vence em <strong>${validadeTxt}</strong>
+            </div>
+          </div>
+          <button class="btn-reservar" onclick="reservarDoacao('${d.id}')">Reservar</button>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function reservarDoacao(id){
+    const d = estado.doacoesSolidarias.find(x => x.id === id);
+    if(!d) return;
+    estado.doacoesSolidarias = estado.doacoesSolidarias.filter(x => x.id !== id);
+
+    // Pedido passa a aparecer em "Meus Pedidos" (ONG) e no console do vendedor
+    estado.pedidos.unshift({
+      id: 'DOA' + Math.floor(Math.random()*9000+1000),
+      produto: d.produto, qtd: d.qtd, tipo: 'doacao', preco: '',
+      comprador: 'Lar Esperança',
+      quando: new Date().toLocaleString('pt-BR'),
+      status: 'pendente',
+      codigo: Math.random().toString(36).substring(2,8).toUpperCase(),
+      comercio: d.comercio,
+      origem: 'Mapa Solidário'
+    });
+
+    estado.notificacoes.unshift({
+      titulo: 'Doação reservada',
+      texto: `${d.produto} (${d.qtd}) de ${d.comercio} — retire até ${formatarLimite(d.validade)}.`,
+      tempo: 'agora'
+    });
+
+    atualizarBadge();
+    atualizarContadorPedidos();
+    atualizarContadorPedidosONG();
+    renderMapaSolidario();
+    renderPedidosONG();
+    renderTabs();
+    mostrarToast(`✅ Doação reservada! Veja em Pedidos.`);
+  }
+
+  // ============ NOVO: renderização do menu Pedidos da ONG ============
+  function atualizarContadorPedidosONG(){
+    const pend = estado.pedidos.filter(p => ehPedidoDaONG(p) && p.status === 'pendente').length;
+    const el = document.getElementById('ongPendentesDash');
+    if(el) el.textContent = pend;
+  }
+
+  function renderPedidosONG(){
+    atualizarContadorPedidosONG();
+    const todosONG = estado.pedidos.filter(ehPedidoDaONG);
+    const total = todosONG.length;
+    const pendentes = todosONG.filter(p => p.status === 'pendente').length;
+
+    const elTotal = document.getElementById('ongTotalPedidos');
+    const elPend = document.getElementById('ongPendentes');
+    if(elTotal) elTotal.textContent = total;
+    if(elPend) elPend.textContent = pendentes;
+
+    const filtro = document.getElementById('filtroStatusPedidoONG')?.value || 'todos';
+    const lista = todosONG.filter(p => filtro === 'todos' || p.status === filtro);
+    const container = document.getElementById('listaPedidosONG');
+    if(!container) return;
+
+    if(lista.length === 0){
+      container.innerHTML = `<div class="vazio"><div class="ico">📋</div>Nenhum pedido ${filtro === 'todos' ? 'ainda. Explore o Mapa Solidário ou a Loja.' : filtro}.</div>`;
+      return;
+    }
+
+    container.innerHTML = lista.map(p => {
+      const tipoLabel = p.tipo === 'venda'
+        ? `💰 Compra${p.preco ? ' · R$ '+p.preco : ''}`
+        : '🤝 Doação gratuita';
+      const statusLabel = {
+        pendente: '⏳ Aguardando retirada',
+        concluido: '✅ Retirado',
+        cancelado: '❌ Cancelado'
+      }[p.status];
+      const origem = p.origem || (p.tipo === 'venda' ? 'Loja Solidária' : 'Mapa Solidário');
+      const comercio = p.comercio ? `Retirar em: <strong>${p.comercio}</strong>` : '';
+      return `
+        <div class="pedido-card ${p.status}">
+          <div class="pedido-header">
+            <span class="pedido-id">${p.id}</span>
+            <span class="pedido-status ${p.status}">${statusLabel}</span>
+          </div>
+          <div class="pedido-produto">${p.produto}</div>
+          <div class="pedido-info">
+            ${p.qtd} · ${tipoLabel}<br>
+            ${comercio ? comercio + '<br>' : ''}
+            📅 ${p.quando}
+          </div>
+          <div class="pedido-codigo">${p.codigo}</div>
+          <div class="pedido-footer">
+            <span style="font-size:.7rem;color:var(--texto-suave)">Código de retirada</span>
+            <span class="pedido-origem">${origem}</span>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  function abrirPedidos(telaOrigem){
+    ultimaTelaOrigem = telaOrigem || (estado.persona === 'dev' ? 'telaDashDev' : 'telaDashComerciante');
+    const btn = document.getElementById('voltarPedidos');
+    if(btn) btn.setAttribute('onclick', `irPara('${ultimaTelaOrigem}')`);
+    renderPedidos();
+    irPara('telaPedidos');
+  }
+  function atualizarContadorPedidos(){
+    const pendentes = estado.pedidos.filter(p => p.status === 'pendente').length;
+    const badgeDash = document.getElementById('badgePedidosDash');
+    if(badgeDash){
+      if(pendentes > 0){ badgeDash.textContent = pendentes; badgeDash.style.display = 'flex'; }
+      else { badgeDash.style.display = 'none'; }
+    }
+    const contVendas = document.getElementById('contadorPedidosVendas');
+    if(contVendas) contVendas.textContent = pendentes;
+  }
+  function renderPedidos(){
+    atualizarContadorPedidos();
+    const total = estado.pedidos.length;
+    const pendentes = estado.pedidos.filter(p => p.status === 'pendente').length;
+    const elTotal = document.getElementById('totalPedidos');
+    const elPend = document.getElementById('pedidosPendentes');
+    if(elTotal) elTotal.textContent = total;
+    if(elPend) elPend.textContent = pendentes;
+
+    const filtro = document.getElementById('filtroStatusPedido')?.value || 'todos';
+    const lista = estado.pedidos.filter(p => filtro === 'todos' || p.status === filtro);
+    const container = document.getElementById('listaPedidos');
+    if(!container) return;
+
+    if(lista.length === 0){
+      container.innerHTML = `<div class="vazio"><div class="ico">📥</div>Nenhum pedido ${filtro === 'todos' ? '' : filtro + ' '}recebido.</div>`;
+      return;
+    }
+
+    container.innerHTML = lista.map(p => {
+      const tipoLabel = p.tipo === 'venda' ? `💰 Venda Solidária${p.preco ? ' · R$ '+p.preco : ''}` : '🤝 Doação';
+      const statusLabel = { pendente: 'Pendente', concluido: 'Entregue', cancelado: 'Cancelado' }[p.status];
+      let acoes = '';
+      if(p.status === 'pendente'){
+        acoes = `<div class="acoes">
+          <button class="btn-mini primario" onclick="marcarPedido('${p.id}','concluido')">✓ Entregue</button>
+          <button class="btn-mini secundario" onclick="marcarPedido('${p.id}','cancelado')">✕</button>
+        </div>`;
+      }
+      return `
+        <div class="pedido-card ${p.status}">
+          <div class="pedido-header">
+            <span class="pedido-id">${p.id}</span>
+            <span class="pedido-status ${p.status}">${statusLabel}</span>
+          </div>
+          <div class="pedido-produto">${p.produto}</div>
+          <div class="pedido-info">
+            ${p.qtd} · ${tipoLabel}<br>
+            👤 ${p.comprador} · ${p.quando}
+          </div>
+          <div class="pedido-codigo">${p.codigo}</div>
+          <div class="pedido-footer">
+            <span style="font-size:.7rem;color:var(--texto-suave)">Código de retirada</span>
+            ${acoes}
+          </div>
+        </div>`;
+    }).join('');
+  }
+  function marcarPedido(id, status){
+    const p = estado.pedidos.find(x => x.id === id);
+    if(!p) return;
+    p.status = status;
+    mostrarToast(status === 'concluido' ? '✓ Pedido marcado como entregue!' : '✕ Pedido cancelado.');
+    estado.notificacoes.unshift({
+      titulo: status === 'concluido' ? 'Pedido entregue' : 'Pedido cancelado',
+      texto: `${p.produto} · ${p.qtd} · ${p.codigo}`, tempo: 'agora'
+    });
+    atualizarBadge();
+    renderPedidos();
+    renderPedidosONG();
+    renderTabs();
+  }
+
+  function renderLoja(){
+    atualizarTituloLoja();
+    const busca = (document.getElementById('buscaLoja')?.value || '').toLowerCase().trim();
+    let prods = produtosLoja;
+    if(lojaCat !== 'todas') prods = prods.filter(p => p.cat === lojaCat);
+    if(busca){
+      prods = prods.filter(p =>
+        p.nome.toLowerCase().includes(busca) ||
+        p.cat.toLowerCase().includes(busca) ||
+        p.local.toLowerCase().includes(busca)
+      );
+    }
+    const grade = document.getElementById('gradeLoja');
+    if(!grade) return;
+    if(prods.length === 0){
+      grade.innerHTML = `<div class="vazio" style="grid-column:1/-1"><div class="ico">🔍</div>Nenhum produto encontrado.</div>`;
+      return;
+    }
+    grade.innerHTML = prods.map(p => `
+      <div class="produto">
+        <div class="img">${p.emoji}<span class="desconto">-${p.desconto}%</span></div>
+        <div class="corpo">
+          <div class="cat">${p.cat}</div>
+          <div class="nome-prod">${p.nome}</div>
+          <div class="precos">
+            <span class="preco">${brl(p.preco)}</span>
+            <span class="preco-velho">${brl(p.precoV)}</span>
+          </div>
+          <div class="rodape">
+            <span class="avaliacao">⭐ ${p.avaliacao.toFixed(1).replace('.',',')}</span>
+            <span class="vendidos">${p.vendidos} vend.</span>
+          </div>
+          <button class="btn-add" onclick="adicionarAoCarrinho(${p.id})">🛒 Adicionar</button>
+        </div>
+      </div>
+    `).join('');
+  }
+  function filtrarLoja(cat){
+    lojaCat = cat;
+    document.querySelectorAll('.cat-pill').forEach(p => p.classList.toggle('ativo', p.dataset.cat === cat));
+    renderLoja();
+  }
+  function adicionarAoCarrinho(id){
+    const p = produtosLoja.find(x => x.id === id);
+    if(!p) return;
+    carrinho.push(p);
+    atualizarCarrinho();
+    renderTabs();
+    mostrarToast(`🛒 ${p.nome} adicionado à sacola!`);
+  }
+  function atualizarCarrinho(){
+    const bar = document.getElementById('lojaCarrinho');
+    if(!bar) return;
+    const isLoja = document.getElementById('telaLoja')?.classList.contains('active');
+    if(carrinho.length > 0 && isLoja){
+      bar.style.display = 'flex';
+      const total = carrinho.reduce((s,p) => s + p.preco, 0);
+      document.getElementById('cartQtdTxt').textContent = carrinho.length + (carrinho.length === 1 ? ' item' : ' itens');
+      document.getElementById('cartTotalTxt').textContent = brl(total);
+    } else { bar.style.display = 'none'; }
+  }
+  function finalizarCompra(){
+    if(carrinho.length === 0) return;
+    const total = carrinho.reduce((s,p) => s + p.preco, 0);
+    const comprador = estado.persona === 'ong' ? 'Lar Esperança' : (estado.persona === 'cliente' ? 'Maria Cliente' : 'Dev User');
+    carrinho.forEach(p => {
+      estado.pedidos.unshift({
+        id: 'PED' + Math.floor(Math.random()*9000+1000),
+        produto: p.nome, qtd: '1 un.', tipo: 'venda', preco: p.preco.toFixed(2).replace('.',','),
+        comprador, quando: new Date().toLocaleString('pt-BR'),
+        status: 'pendente',
+        codigo: Math.random().toString(36).substring(2,8).toUpperCase(),
+        comercio: p.local,
+        origem: 'Loja Solidária'
+      });
+    });
+    mostrarToast(`🎉 Compra de ${brl(total)} finalizada!`);
+    carrinho = [];
+    atualizarCarrinho();
+    renderTabs();
+    renderPedidosONG();
+    setTimeout(() => {
+      estado.notificacoes.unshift({
+        titulo: 'Compra na Loja Solidária',
+        texto: `Pedido de ${brl(total)} confirmado.`,
+        tempo: 'agora'
+      });
+      atualizarBadge();
+    }, 400);
+  }
+
+  function renderDashboard(){
+    const el1 = document.getElementById('dbVendas');
+    const el2 = document.getElementById('dbTicket');
+    const el3 = document.getElementById('dbDoacoes');
+    const el4 = document.getElementById('dbConversoes');
+    if(el1) el1.textContent = estado.itensVendidos;
+    if(el2) el2.textContent = 'R$ ' + (estado.itensVendidos * 15).toFixed(0);
+    if(el3) el3.textContent = estado.itensDoados;
+    if(el4) el4.textContent = estado.ofertasPublicadas + '→' + estado.doacoesTotal;
+
+    const cats = { 'Pães e panificados': 42, 'Frutas e legumes': 28, 'Refeições prontas': 18, 'Laticínios': 12 };
+    const el = document.getElementById('dbCategorias');
+    if(el){
+      el.innerHTML = Object.entries(cats).map(([k,v]) => `
+        <div style="margin-bottom:10px">
+          <div style="display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:4px">
+            <span style="font-weight:700">${k}</span>
+            <span style="color:var(--texto-suave)">${v}%</span>
+          </div>
+          <div class="barra"><div style="width:${v}%"></div></div>
+        </div>
+      `).join('');
+    }
+
+    const dados = [
+      { nome:'Padaria Pão Dourado', kg: 12 },
+      { nome:'Mercado Bom Preço', kg: 8 },
+      { nome:'Restaurante Sabor', kg: 5 }
+    ];
+    const elR = document.getElementById('rankingDash');
+    if(elR){
+      elR.innerHTML = dados.map((d,i) => `
+        <div class="ranking-item">
+          <span class="pos">${i+1}º</span>
+          <span class="nome-parc">${d.nome}</span>
+          <span class="kg">${d.kg} kg</span>
+        </div>
+      `).join('');
+    }
+  }
+
+  function renderDestaques(){
+    const produtos = [...produtosLoja].sort((a,b) => b.vendidos - a.vendidos).slice(0,4);
+    const el = document.getElementById('listaDestaques');
+    if(!el) return;
+    el.innerHTML = produtos.map((p, i) => `
+      <div class="destaque-card" onclick="navegarAba('loja')">
+        <div class="em-destaque">${p.emoji}</div>
+        <div class="info-destaque">
+          <div class="rank-destaque">#${i+1} mais vendido</div>
+          <div class="nome-destaque">${p.nome}</div>
+          <div class="meta-destaque">⭐ ${p.avaliacao.toFixed(1).replace('.',',')} · ${p.vendidos} vendidos · ${brl(p.preco)}</div>
+        </div>
+        <div class="seta-destaque">→</div>
+      </div>
+    `).join('');
+  }
+
+  function renderDestaquesLoja(){
+    const nivel = estado.nivel;
+    const pct = Math.min(100, (nivel.xp / nivel.xpProximo) * 100);
+
+    const elTitulo = document.getElementById('nivelTitulo');
+    const elXp = document.getElementById('nivelXp');
+    const elBarra = document.getElementById('nivelBarra');
+    const elProx = document.getElementById('nivelProximo');
+    if(elTitulo) elTitulo.textContent = nivel.nome;
+    if(elXp) elXp.textContent = `${nivel.xp} / ${nivel.xpProximo} XP`;
+    if(elBarra) elBarra.style.width = pct + '%';
+    if(elProx) elProx.textContent = `Faltam ${nivel.xpProximo - nivel.xp} XP para ${nivel.proximo} ${nivel.ico}`;
+
+    const elM = document.getElementById('listaMissoes');
+    if(elM){
+      elM.innerHTML = estado.missoes.map(m => {
+        const prog = Math.min(100, (m.progresso / m.meta) * 100);
+        return `
+          <div class="missao ${m.concluida ? 'concluida' : ''}">
+            <div class="missao-header">
+              <div class="missao-ico">${m.ico}</div>
+              <div class="missao-info">
+                <div class="missao-titulo">${m.titulo}</div>
+                <div class="missao-desc">${m.desc}</div>
+              </div>
+              ${m.concluida ? '<div class="missao-check">✓</div>' : ''}
+            </div>
+            <div class="missao-progresso">
+              <div class="barra"><div style="width:${prog}%"></div></div>
+              <span class="txt">${m.progresso}/${m.meta}</span>
+            </div>
+            <div class="missao-recompensa">🎁 ${m.recompensa}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    const elB = document.getElementById('listaBeneficios');
+    if(elB){
+      elB.innerHTML = estado.beneficios.map(b => `
+        <div class="beneficio-item">
+          <div class="b-ico">${b.ico}</div>
+          <div class="b-info">
+            <div class="b-titulo">${b.titulo}</div>
+            <div class="b-desc">${b.desc}</div>
+          </div>
+          <span class="b-status ${b.ativo ? 'ativo' : 'bloqueado'}">${b.ativo ? 'Ativo' : 'Bloqueado'}</span>
+        </div>
+      `).join('');
+    }
+
+    const elN = document.getElementById('proximosNiveis');
+    if(elN){
+      const niveis = [
+        { nome:'Bronze', ico:'🥉', xp:0, atual:true },
+        { nome:'Prata', ico:'🥈', xp:500, atual:false },
+        { nome:'Ouro', ico:'🥇', xp:1500, atual:false },
+        { nome:'Diamante', ico:'💎', xp:3000, atual:false }
+      ];
+      elN.innerHTML = niveis.map(n => `
+        <div class="beneficio-item">
+          <div class="b-ico">${n.ico}</div>
+          <div class="b-info">
+            <div class="b-titulo">${n.nome}</div>
+            <div class="b-desc">${n.xp === 0 ? 'Nível inicial' : n.xp.toLocaleString('pt-BR') + ' XP necessários'}</div>
+          </div>
+          <span class="b-status ${n.atual ? 'ativo' : 'bloqueado'}">${n.atual ? 'Atual' : 'Próximo'}</span>
+        </div>
+      `).join('');
+    }
+  }
+
+  function abrirNotificacoes(){
+    const el = document.getElementById('listaNotif');
+    if(estado.notificacoes.length === 0){
+      el.innerHTML = `<div class="vazio"><div class="ico">🔔</div>Nenhuma notificação.</div>`;
+    } else {
+      el.innerHTML = estado.notificacoes.map(n => `
+        <div class="notif">
+          <strong>${n.titulo}</strong>
+          <div>${n.texto}</div>
+          <small>${n.tempo}</small>
+        </div>
+      `).join('');
+    }
+    irPara('telaNotif');
+  }
+  function atualizarBadge(){
+    const b = document.getElementById('badgeNotif');
+    b.textContent = estado.notificacoes.length;
+    b.style.display = estado.notificacoes.length ? 'flex' : 'none';
+  }
+
+  function renderRanking(){
+    const dados = [
+      { nome:'Padaria Pão Dourado', kg: 12 },
+      { nome:'Mercado Bom Preço', kg: 8 },
+      { nome:'Restaurante Sabor', kg: 5 }
+    ];
+    const el = document.getElementById('ranking');
+    if(el){
+      el.innerHTML = dados.map((d,i) => `
+        <div class="ranking-item">
+          <span class="pos">${i+1}º</span>
+          <span class="nome-parc">${d.nome}</span>
+          <span class="kg">${d.kg} kg</span>
+        </div>
+      `).join('');
+    }
+  }
+
+  function exportarRelatorio(){
+    const r = document.getElementById('conteudoRelatorio');
+    r.innerHTML = `
+      <h3>Relatório de Impacto — REAPROVEITA</h3>
+      <p style="color:var(--texto-suave);font-size:.78rem">Gerado em ${new Date().toLocaleDateString('pt-BR')} às ${new Date().toLocaleTimeString('pt-BR')}</p>
+      <table>
+        <tr><td>Kg doados</td><td>${estado.kgTotal} kg</td></tr>
+        <tr><td>Doações concluídas</td><td>${estado.doacoesTotal}</td></tr>
+        <tr><td>Ofertas publicadas</td><td>${estado.ofertasPublicadas}</td></tr>
+        <tr><td>Pedidos recebidos</td><td>${estado.pedidos.length}</td></tr>
+        <tr><td>Doações solidárias ativas</td><td>${estado.doacoesSolidarias.length}</td></tr>
+        <tr><td>Proporção de conversão</td><td>${Math.round((estado.doacoesTotal/estado.ofertasPublicadas)*100)}%</td></tr>
+        <tr><td>Tempo médio de retirada</td><td>${estado.tempoMedio} min</td></tr>
+        <tr><td>Instituições atendidas</td><td>${estado.instituicoesAtendidas}</td></tr>
+      </table>
+      <p style="margin-top:12px"><strong>Patrocinadores:</strong> Mercado Verde, Transportes Já, Padaria Central</p>
+      <p style="margin-top:8px;font-size:.72rem;color:var(--texto-suave)">Relatório gerado automaticamente pelo REAPROVEITA.</p>
+    `;
+    irPara('telaRelatorio');
+  }
+
+  function toggleFonte(){
+    fonteGrande = !fonteGrande;
+    document.documentElement.style.setProperty('--fonte-base', fonteGrande ? '17px' : '15px');
+    document.getElementById('btnFonte').classList.toggle('ativo', fonteGrande);
+    document.getElementById('btnFonte').textContent = fonteGrande ? '🔠 Fonte normal' : '🔠 Aumentar fonte';
+  }
+  function toggleContraste(){
+    document.body.classList.toggle('alto-contraste');
+    document.getElementById('btnContraste').classList.toggle('ativo', document.body.classList.contains('alto-contraste'));
+  }
+
+  function simularOffline(){
+    const st = document.getElementById('statusOffline');
+    st.textContent = 'Status: offline — oferta salva no aparelho';
+    st.style.color = 'var(--vermelho)';
+    mostrarToast('📶 Oferta salva offline. Será sincronizada quando houver conexão.');
+    setTimeout(() => {
+      st.textContent = 'Status: online — sincronizado ✅';
+      st.style.color = 'var(--verde)';
+    }, 3000);
+  }
+
+  function abrirModalRedefinir(){
+    document.getElementById('modalRedefinir').classList.add('show');
+    const btn = document.getElementById('btnConfirmarRedefinir');
+    btn.disabled = true;
+    setTimeout(() => { btn.disabled = false; }, 1500);
+  }
+  function fecharModalRedefinir(){
+    document.getElementById('modalRedefinir').classList.remove('show');
+  }
+  function executarRedefinir(){
+    estado = estadoInicial();
+    fonteGrande = false; temaEscuro = false;
+    carrinho = []; lojaCat = 'todas'; loginPersona = 'loja';
+    ultimaTelaOrigem = 'telaDashComerciante';
+
+    document.documentElement.style.setProperty('--fonte-base', '15px');
+    document.body.classList.remove('alto-contraste');
+    document.body.classList.remove('dark-mode');
+    document.getElementById('btnFonte').classList.remove('ativo');
+    document.getElementById('btnFonte').textContent = '🔠 Aumentar fonte';
+    document.getElementById('btnContraste').classList.remove('ativo');
+    atualizarBotoesTema(); salvarTema();
+
+    ['cadNome','cadTelefone','cadEndereco','qtdAlimento','nomeProduto','qualidadeProduto','armazenamento','validadeProduto','precoSolidario','loginId','loginSenha','limiteOferta'].forEach(id => {
+      const el = document.getElementById(id); if(el) el.value = '';
+    });
+    ['cadTermos','checkSanitario'].forEach(id => {
+      const el = document.getElementById(id); if(el) el.checked = false;
+    });
+    const cat = document.getElementById('filtroCategoria'); if(cat) cat.value = 'todas';
+    const dist = document.getElementById('filtroDistancia'); if(dist) dist.value = '999';
+    const stFiltro = document.getElementById('filtroStatusPedido'); if(stFiltro) stFiltro.value = 'todos';
+    const stFiltroONG = document.getElementById('filtroStatusPedidoONG'); if(stFiltroONG) stFiltroONG.value = 'todos';
+    const raio = document.getElementById('filtroRaioSolidario'); if(raio) raio.value = '99999';
+    const prio = document.getElementById('filtroPrioridadeSolidario'); if(prio) prio.value = 'validade';
+
+    setPersona('loja'); setTipoPublicacao('doacao');
+    const st = document.getElementById('statusOffline');
+    if(st){ st.textContent = 'Status: online'; st.style.color = ''; }
+
+    const buscaEl = document.getElementById('buscaLoja'); if(buscaEl) buscaEl.value = '';
+    document.querySelectorAll('.cat-pill').forEach((p,i) => p.classList.toggle('ativo', i === 0));
+
+    renderHistorico(); renderHistoricoDashComerciante(); renderOfertas();
+    renderLoja(); renderRanking(); renderPedidos(); renderPedidosONG();
+    renderMapaSolidario(); renderDestaquesLoja();
+    atualizarBadge(); atualizarCarrinho();
+
+    document.getElementById('kgDoados').textContent = estado.kgTotal;
+    document.getElementById('doacoes').textContent = estado.doacoesTotal;
+    document.getElementById('estabs').textContent = 2;
+    document.getElementById('tempo').textContent = estado.tempoMedio;
+    const pct = Math.round((estado.doacoesTotal / estado.ofertasPublicadas) * 100);
+    document.getElementById('pctDoacao').textContent = pct;
+    document.getElementById('barraDoacao').style.width = pct + '%';
+
+    document.getElementById('ultimaRedefinicao').textContent =
+      new Date().toLocaleDateString('pt-BR') + ' às ' + new Date().toLocaleTimeString('pt-BR');
+
+    fecharModalRedefinir();
+    document.getElementById('tabs').style.display = 'none';
+    irPara('telaLogin');
+    mostrarToast('🔄 Dados redefinidos. Faça login para continuar.');
+  }
+
+  setInterval(() => {
+    verificarEsgotadas();
+    const telaOfertasAtiva = document.getElementById('tela3')?.classList.contains('active');
+    const telaDetalheAtiva = document.getElementById('tela4')?.classList.contains('active');
+    const telaSolidariaAtiva = document.getElementById('telaMapaSolidario')?.classList.contains('active');
+    if(telaOfertasAtiva){ renderOfertas(); }
+    if(telaSolidariaAtiva){ renderMapaSolidario(); }
+    if(telaDetalheAtiva && estaEsgotada(estado.ofertaAtual)){
+      document.getElementById('alertaDetalhe').innerHTML =
+        `<div class="alerta-esgotada">⛔ Esta oferta esgotou (limite: ${formatarLimite(estado.ofertaAtual.limite)})</div>`;
+      document.getElementById('campoRetirada').style.display = 'none';
+    }
+  }, 15000);
+
+  carregarTema();
+  setPersona('loja');
+  renderHistorico();
+  renderHistoricoDashComerciante();
+  renderOfertas();
+  renderLoja();
+  renderRanking();
+  renderPedidos();
+  renderPedidosONG();
+  renderMapaSolidario();
+  renderDestaquesLoja();
+  atualizarBadge();
+  atualizarCarrinho();
+  document.getElementById('tabs').style.display = 'none';
+</script>
+</body>
+</html>
